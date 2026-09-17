@@ -23,6 +23,16 @@ const COULEURS: Record<string, string> = {
   navy: "bg-navy/12 text-navy",
 };
 
+const BARRES: Record<string, string> = {
+  petrol: "bg-petrol",
+  brick: "bg-brick",
+  orange: "bg-orange",
+  gold: "bg-gold",
+  leaf: "bg-leaf",
+  sky: "bg-sky",
+  navy: "bg-navy",
+};
+
 export function KPICard({
   label,
   valeur,
@@ -35,7 +45,7 @@ export function KPICard({
 }: KPICardProps) {
   const contenu = (
     <div className="group relative h-full overflow-hidden rounded-xl border border-border bg-card p-5 shadow-[var(--shadow-card)] transition-all hover:-translate-y-0.5 hover:shadow-[var(--shadow-raised)]">
-      <span className={cn("absolute inset-x-0 top-0 h-1", `bg-${couleur}`)} aria-hidden />
+      <span className={cn("absolute inset-x-0 top-0 h-1", BARRES[couleur])} aria-hidden />
       <div className="flex items-start justify-between gap-3">
         <div className="min-w-0">
           <p className="truncate text-sm font-medium text-muted-foreground">{label}</p>
