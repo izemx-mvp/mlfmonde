@@ -50,7 +50,7 @@ function PageCollaborateurs() {
   const [service, setService] = useState(TOUS);
   const [contrat, setContrat] = useState(TOUS);
   const [statut, setStatut] = useState(TOUS);
-  const [formulaire, setFormulaire] = useState<{ ouvert: boolean; collaborateur?: Collaborateur }>({ ouvert: false });
+  const [formulaire, setFormulaire] = useState<{ ouvert: boolean; collaborateur?: Collaborateur | undefined }>({ ouvert: false });
   const [aSupprimer, setASupprimer] = useState<Collaborateur | null>(null);
 
   const donnees = collaborateurs.filter(
@@ -95,7 +95,7 @@ function PageCollaborateurs() {
                 <Pencil className="size-4" />
                 Modifier
               </DropdownMenuItem>
-              <DropdownMenuItem variant="destructive" onSelect={() => setASupprimer(c)}>
+              <DropdownMenuItem className="text-brick focus:text-brick" onSelect={() => setASupprimer(c)}>
                 <Trash2 className="size-4" />
                 Supprimer
               </DropdownMenuItem>

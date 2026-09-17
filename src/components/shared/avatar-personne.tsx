@@ -16,7 +16,7 @@ export function AvatarPersonne({
   className,
 }: {
   nom: string;
-  sousTitre?: string;
+  sousTitre?: string | undefined;
   taille?: "sm" | "md" | "lg";
   className?: string;
 }) {

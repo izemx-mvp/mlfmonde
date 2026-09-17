@@ -51,7 +51,7 @@ function PageReclamations() {
             <XAxis dataKey="categorie" tick={{ fontSize: 11 }} stroke="var(--color-muted-foreground)" />
             <YAxis tick={{ fontSize: 11 }} stroke="var(--color-muted-foreground)" />
             <Tooltip contentStyle={{ borderRadius: 10, border: "1px solid var(--color-border)" }} />
-            <Bar dataKey="total" fill="var(--color-brick)" radius={[6, 6, 0, 0]} name="Réclamations" />
+            <Bar dataKey="valeur" fill="var(--color-brick)" radius={[6, 6, 0, 0]} name="Réclamations" />
           </BarChart>
         </ResponsiveContainer>
       </ChartCard>

@@ -12,9 +12,13 @@ import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as DocumentsRouteImport } from './routes/documents'
 import { Route as OnboardingRouteImport } from './routes/onboarding'
+import { Route as AdministrationParametresRouteImport } from './routes/administration.parametres'
+import { Route as AdministrationUtilisateursRouteImport } from './routes/administration.utilisateurs'
 import { Route as AssistantsEmployeRouteImport } from './routes/assistants.employe'
 import { Route as AssistantsServiceEcoleRouteImport } from './routes/assistants.service-ecole'
 import { Route as DemandesIndexRouteImport } from './routes/demandes.index'
+import { Route as DemandesConversationsRouteImport } from './routes/demandes.conversations'
+import { Route as DemandesEmailsRouteImport } from './routes/demandes.emails'
 import { Route as DemandesReclamationsRouteImport } from './routes/demandes.reclamations'
 import { Route as RecrutementCandidaturesRouteImport } from './routes/recrutement.candidatures'
 import { Route as RecrutementEntretiensRouteImport } from './routes/recrutement.entretiens'
@@ -42,6 +46,18 @@ const OnboardingRoute = OnboardingRouteImport.update({
   path: '/onboarding',
   getParentRoute: () => rootRouteImport,
 } as any)
+const AdministrationParametresRoute =
+  AdministrationParametresRouteImport.update({
+    id: '/administration/parametres',
+    path: '/administration/parametres',
+    getParentRoute: () => rootRouteImport,
+  } as any)
+const AdministrationUtilisateursRoute =
+  AdministrationUtilisateursRouteImport.update({
+    id: '/administration/utilisateurs',
+    path: '/administration/utilisateurs',
+    getParentRoute: () => rootRouteImport,
+  } as any)
 const AssistantsEmployeRoute = AssistantsEmployeRouteImport.update({
   id: '/assistants/employe',
   path: '/assistants/employe',
@@ -55,6 +71,16 @@ const AssistantsServiceEcoleRoute = AssistantsServiceEcoleRouteImport.update({
 const DemandesIndexRoute = DemandesIndexRouteImport.update({
   id: '/demandes/',
   path: '/demandes/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const DemandesConversationsRoute = DemandesConversationsRouteImport.update({
+  id: '/demandes/conversations',
+  path: '/demandes/conversations',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const DemandesEmailsRoute = DemandesEmailsRouteImport.update({
+  id: '/demandes/emails',
+  path: '/demandes/emails',
   getParentRoute: () => rootRouteImport,
 } as any)
 const DemandesReclamationsRoute = DemandesReclamationsRouteImport.update({
@@ -117,8 +143,12 @@ export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/documents': typeof DocumentsRoute
   '/onboarding': typeof OnboardingRoute
+  '/administration/parametres': typeof AdministrationParametresRoute
+  '/administration/utilisateurs': typeof AdministrationUtilisateursRoute
   '/assistants/employe': typeof AssistantsEmployeRoute
   '/assistants/service-ecole': typeof AssistantsServiceEcoleRoute
+  '/demandes/conversations': typeof DemandesConversationsRoute
+  '/demandes/emails': typeof DemandesEmailsRoute
   '/demandes/reclamations': typeof DemandesReclamationsRoute
   '/recrutement/candidatures': typeof RecrutementCandidaturesRoute
   '/recrutement/entretiens': typeof RecrutementEntretiensRoute
@@ -136,8 +166,12 @@ export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/documents': typeof DocumentsRoute
   '/onboarding': typeof OnboardingRoute
+  '/administration/parametres': typeof AdministrationParametresRoute
+  '/administration/utilisateurs': typeof AdministrationUtilisateursRoute
   '/assistants/employe': typeof AssistantsEmployeRoute
   '/assistants/service-ecole': typeof AssistantsServiceEcoleRoute
+  '/demandes/conversations': typeof DemandesConversationsRoute
+  '/demandes/emails': typeof DemandesEmailsRoute
   '/demandes/reclamations': typeof DemandesReclamationsRoute
   '/recrutement/candidatures': typeof RecrutementCandidaturesRoute
   '/recrutement/entretiens': typeof RecrutementEntretiensRoute
@@ -156,8 +190,12 @@ export interface FileRoutesById {
   '/': typeof IndexRoute
   '/documents': typeof DocumentsRoute
   '/onboarding': typeof OnboardingRoute
+  '/administration/parametres': typeof AdministrationParametresRoute
+  '/administration/utilisateurs': typeof AdministrationUtilisateursRoute
   '/assistants/employe': typeof AssistantsEmployeRoute
   '/assistants/service-ecole': typeof AssistantsServiceEcoleRoute
+  '/demandes/conversations': typeof DemandesConversationsRoute
+  '/demandes/emails': typeof DemandesEmailsRoute
   '/demandes/reclamations': typeof DemandesReclamationsRoute
   '/recrutement/candidatures': typeof RecrutementCandidaturesRoute
   '/recrutement/entretiens': typeof RecrutementEntretiensRoute
@@ -177,8 +215,12 @@ export interface FileRouteTypes {
     | '/'
     | '/documents'
     | '/onboarding'
+    | '/administration/parametres'
+    | '/administration/utilisateurs'
     | '/assistants/employe'
     | '/assistants/service-ecole'
+    | '/demandes/conversations'
+    | '/demandes/emails'
     | '/demandes/reclamations'
     | '/recrutement/candidatures'
     | '/recrutement/entretiens'
@@ -196,8 +238,12 @@ export interface FileRouteTypes {
     | '/'
     | '/documents'
     | '/onboarding'
+    | '/administration/parametres'
+    | '/administration/utilisateurs'
     | '/assistants/employe'
     | '/assistants/service-ecole'
+    | '/demandes/conversations'
+    | '/demandes/emails'
     | '/demandes/reclamations'
     | '/recrutement/candidatures'
     | '/recrutement/entretiens'
@@ -215,8 +261,12 @@ export interface FileRouteTypes {
     | '/'
     | '/documents'
     | '/onboarding'
+    | '/administration/parametres'
+    | '/administration/utilisateurs'
     | '/assistants/employe'
     | '/assistants/service-ecole'
+    | '/demandes/conversations'
+    | '/demandes/emails'
     | '/demandes/reclamations'
     | '/recrutement/candidatures'
     | '/recrutement/entretiens'
@@ -235,8 +285,12 @@ export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   DocumentsRoute: typeof DocumentsRoute
   OnboardingRoute: typeof OnboardingRoute
+  AdministrationParametresRoute: typeof AdministrationParametresRoute
+  AdministrationUtilisateursRoute: typeof AdministrationUtilisateursRoute
   AssistantsEmployeRoute: typeof AssistantsEmployeRoute
   AssistantsServiceEcoleRoute: typeof AssistantsServiceEcoleRoute
+  DemandesConversationsRoute: typeof DemandesConversationsRoute
+  DemandesEmailsRoute: typeof DemandesEmailsRoute
   DemandesReclamationsRoute: typeof DemandesReclamationsRoute
   RecrutementCandidaturesRoute: typeof RecrutementCandidaturesRoute
   RecrutementEntretiensRoute: typeof RecrutementEntretiensRoute
@@ -274,6 +328,20 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof OnboardingRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/administration/parametres': {
+      id: '/administration/parametres'
+      path: '/administration/parametres'
+      fullPath: '/administration/parametres'
+      preLoaderRoute: typeof AdministrationParametresRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/administration/utilisateurs': {
+      id: '/administration/utilisateurs'
+      path: '/administration/utilisateurs'
+      fullPath: '/administration/utilisateurs'
+      preLoaderRoute: typeof AdministrationUtilisateursRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/assistants/employe': {
       id: '/assistants/employe'
       path: '/assistants/employe'
@@ -293,6 +361,20 @@ declare module '@tanstack/react-router' {
       path: '/demandes'
       fullPath: '/demandes/'
       preLoaderRoute: typeof DemandesIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/demandes/conversations': {
+      id: '/demandes/conversations'
+      path: '/demandes/conversations'
+      fullPath: '/demandes/conversations'
+      preLoaderRoute: typeof DemandesConversationsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/demandes/emails': {
+      id: '/demandes/emails'
+      path: '/demandes/emails'
+      fullPath: '/demandes/emails'
+      preLoaderRoute: typeof DemandesEmailsRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/demandes/reclamations': {
@@ -379,8 +461,12 @@ const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   DocumentsRoute: DocumentsRoute,
   OnboardingRoute: OnboardingRoute,
+  AdministrationParametresRoute: AdministrationParametresRoute,
+  AdministrationUtilisateursRoute: AdministrationUtilisateursRoute,
   AssistantsEmployeRoute: AssistantsEmployeRoute,
   AssistantsServiceEcoleRoute: AssistantsServiceEcoleRoute,
+  DemandesConversationsRoute: DemandesConversationsRoute,
+  DemandesEmailsRoute: DemandesEmailsRoute,
   DemandesReclamationsRoute: DemandesReclamationsRoute,
   RecrutementCandidaturesRoute: RecrutementCandidaturesRoute,
   RecrutementEntretiensRoute: RecrutementEntretiensRoute,

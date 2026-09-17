@@ -50,7 +50,7 @@ export interface Absence {
   source: "Portail RH" | "Email" | "WhatsApp" | "Saisie manuelle";
   statut: "En attente" | "Approuvé" | "Refusé" | "En cours";
   motif: string;
-  detectionIA?: string;
+  detectionIA?: string | undefined;
 }
 
 export interface EvenementRH {
@@ -121,7 +121,7 @@ export interface DocumentRH {
   collaborateurId: string;
   date: string;
   statut: "Généré" | "Signé" | "Brouillon";
-  echeance?: string;
+  echeance?: string | undefined;
 }
 
 export interface Demande {

@@ -28,7 +28,7 @@ export function FormulaireCollaborateur({
   onClose,
 }: {
   ouvert: boolean;
-  collaborateur?: Collaborateur;
+  collaborateur?: Collaborateur | undefined;
   onClose: () => void;
 }) {
   const { ajouterCollaborateur, majCollaborateur, ajouterNotification } = useAppStore();
@@ -61,11 +61,11 @@ export function FormulaireCollaborateur({
 
   const valider = () => {
     const e: Record<string, string> = {};
-    if (!valeurs.prenom.trim()) e.prenom = "Le prénom est obligatoire.";
-    if (!valeurs.nom.trim()) e.nom = "Le nom est obligatoire.";
-    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(valeurs.email)) e.email = "Adresse email invalide.";
-    if (!valeurs.fonction.trim()) e.fonction = "La fonction est obligatoire.";
-    if (!valeurs.dateArrivee) e.dateArrivee = "La date d'arrivée est obligatoire.";
+    if (!valeurs.prenom.trim()) e["prenom"] = "Le prénom est obligatoire.";
+    if (!valeurs.nom.trim()) e["nom"] = "Le nom est obligatoire.";
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(valeurs.email)) e["email"] = "Adresse email invalide.";
+    if (!valeurs.fonction.trim()) e["fonction"] = "La fonction est obligatoire.";
+    if (!valeurs.dateArrivee) e["dateArrivee"] = "La date d'arrivée est obligatoire.";
     setErreurs(e);
     return Object.keys(e).length === 0;
   };
@@ -111,13 +111,13 @@ export function FormulaireCollaborateur({
         </DialogHeader>
 
         <div className="grid gap-4 sm:grid-cols-2">
-          <Champ label="Prénom *" erreur={erreurs.prenom}>
+          <Champ label="Prénom *" erreur={erreurs["prenom"]}>
             <Input value={valeurs.prenom} onChange={(e) => set("prenom", e.target.value)} placeholder="Salma" />
           </Champ>
-          <Champ label="Nom *" erreur={erreurs.nom}>
+          <Champ label="Nom *" erreur={erreurs["nom"]}>
             <Input value={valeurs.nom} onChange={(e) => set("nom", e.target.value)} placeholder="Bennani" />
           </Champ>
-          <Champ label="Email professionnel *" erreur={erreurs.email}>
+          <Champ label="Email professionnel *" erreur={erreurs["email"]}>
             <Input value={valeurs.email} onChange={(e) => set("email", e.target.value)} placeholder="s.bennani@lfilm.org" />
           </Champ>
           <Champ label="Téléphone">
@@ -133,7 +133,7 @@ export function FormulaireCollaborateur({
               </SelectContent>
             </Select>
           </Champ>
-          <Champ label="Fonction *" erreur={erreurs.fonction}>
+          <Champ label="Fonction *" erreur={erreurs["fonction"]}>
             <Select value={valeurs.fonction} onValueChange={(v) => set("fonction", v)}>
               <SelectTrigger><SelectValue placeholder="Choisir une fonction" /></SelectTrigger>
               <SelectContent>
@@ -153,7 +153,7 @@ export function FormulaireCollaborateur({
               </SelectContent>
             </Select>
           </Champ>
-          <Champ label="Date d'arrivée *" erreur={erreurs.dateArrivee}>
+          <Champ label="Date d'arrivée *" erreur={erreurs["dateArrivee"]}>
             <Input type="date" value={valeurs.dateArrivee} onChange={(e) => set("dateArrivee", e.target.value)} />
           </Champ>
           <Champ label="Statut">
@@ -180,7 +180,7 @@ export function FormulaireCollaborateur({
   );
 }
 
-function Champ({ label, erreur, children }: { label: string; erreur?: string; children: React.ReactNode }) {
+function Champ({ label, erreur, children }: { label: string; erreur?: string | undefined; children: React.ReactNode }) {
   return (
     <div className="space-y-1.5">
       <Label className="text-xs font-semibold text-muted-foreground uppercase">{label}</Label>

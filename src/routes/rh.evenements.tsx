@@ -126,7 +126,7 @@ function PageEvenements() {
                   {e.type} dans {jours} jour{jours > 1 ? "s" : ""} — {nomComplet(e.collaborateurId)}
                 </p>
                 <p className="text-xs text-muted-foreground">
-                  {e.intitule} · prévu le {formatDate(e.date)} · responsable {e.responsable}
+                  {} · prévu le {formatDate(e.date)} · responsable {e.responsable}
                 </p>
               </div>
             </div>
@@ -209,7 +209,7 @@ function FormulaireEvenement({
         <div className="space-y-1.5 sm:col-span-2">
           <Label className="text-xs font-semibold text-muted-foreground uppercase">Intitulé *</Label>
           <Input value={intitule} onChange={(e) => setIntitule(e.target.value)} placeholder="Visite médicale annuelle" />
-          {erreurs.intitule && <p className="text-xs text-brick">{erreurs.intitule}</p>}
+          {erreurs["intitule"] && <p className="text-xs text-brick">{erreurs["intitule"]}</p>}
         </div>
         <div className="space-y-1.5">
           <Label className="text-xs font-semibold text-muted-foreground uppercase">Collaborateur *</Label>
@@ -221,7 +221,7 @@ function FormulaireEvenement({
               ))}
             </SelectContent>
           </Select>
-          {erreurs.collaborateurId && <p className="text-xs text-brick">{erreurs.collaborateurId}</p>}
+          {erreurs["collaborateurId"] && <p className="text-xs text-brick">{erreurs["collaborateurId"]}</p>}
         </div>
         <div className="space-y-1.5">
           <Label className="text-xs font-semibold text-muted-foreground uppercase">Type *</Label>
@@ -248,8 +248,8 @@ function FormulaireEvenement({
         <Button
           onClick={() => {
             const err: Record<string, string> = {};
-            if (!intitule.trim()) err.intitule = "L'intitulé est obligatoire.";
-            if (!collaborateurId) err.collaborateurId = "Sélectionnez un collaborateur.";
+            if (!intitule.trim()) err["intitule"] = "L'intitulé est obligatoire.";
+            if (!collaborateurId) err["collaborateurId"] = "Sélectionnez un collaborateur.";
             setErreurs(err);
             if (Object.keys(err).length > 0) {
               toast.error("Formulaire incomplet", { description: "Merci de corriger les champs signalés." });
