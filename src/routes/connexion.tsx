@@ -31,8 +31,8 @@ export const Route = createFileRoute("/connexion")({
 function PageConnexion() {
   const router = useRouter();
   const connecter = useServerFn(connecterLFILM);
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+  const [email, setEmail] = useState("mlfmonde@izemxlab.com");
+  const [password, setPassword] = useState("mlfmonde2026@");
   const [erreur, setErreur] = useState("");
   const [chargement, setChargement] = useState(false);
 
