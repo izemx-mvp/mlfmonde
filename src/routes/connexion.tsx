@@ -36,8 +36,9 @@ function PageConnexion() {
   const [erreur, setErreur] = useState("");
   const [chargement, setChargement] = useState(false);
 
-  async function soumettre(event: FormEvent<HTMLFormElement>) {
-    event.preventDefault();
+  async function authentifier() {
+    if (chargement) return;
+
     setErreur("");
     setChargement(true);
 
@@ -53,6 +54,11 @@ function PageConnexion() {
     } finally {
       setChargement(false);
     }
+  }
+
+  function soumettre(event: FormEvent<HTMLFormElement>) {
+    event.preventDefault();
+    void authentifier();
   }
 
   return (
@@ -133,7 +139,7 @@ function PageConnexion() {
                 </p>
               )}
 
-              <Button type="submit" className="w-full" disabled={chargement}>
+              <Button type="button" className="w-full" disabled={chargement} onClick={() => void authentifier()}>
                 {chargement ? "Connexion..." : "Se connecter"}
               </Button>
             </form>
