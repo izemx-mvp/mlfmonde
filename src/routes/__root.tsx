@@ -83,8 +83,19 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       return;
     }
 
-    const session = await verifierSessionLFILM();
-    if (!session.connecte) {
+    let connecte = false;
+    try {
+      const session = await verifierSessionLFILM();
+      connecte = session.connecte;
+    } catch (erreur) {
+      if (erreur instanceof Response || (erreur as { isRedirect?: boolean })?.isRedirect) {
+        throw erreur;
+      }
+      // Réseau indisponible (rechargement du serveur) : on renvoie vers la connexion
+      connecte = false;
+    }
+
+    if (!connecte) {
       throw redirect({ to: "/connexion" });
     }
   },
