@@ -50,7 +50,9 @@ function CommandCenter() {
 
   const nouveaux = collaborateurs.filter((c) => c.dateArrivee >= "2026-06-01").length;
   const departs = 5;
-  const absencesEnCours = absences.filter((a) => a.statut === "En cours").length;
+  const absencesEnCours = absences.filter(
+    (a) => a.dateDebut <= "2026-09-17" && a.dateFin >= "2026-09-17" && a.statut !== "Refusé",
+  ).length;
   const congesAttente = absences.filter((a) => a.statut === "En attente").length;
   const evenementsPlanifies = evenements.filter((e) => e.statut === "Planifié").length;
   const documentsExpirants = evenements.filter((e) => e.type === "Renouvellement de document").length;

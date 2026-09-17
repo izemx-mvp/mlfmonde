@@ -66,7 +66,9 @@ const COULEURS_PIE = ["var(--petrol)", "var(--sky)", "var(--orange)", "var(--lea
 function Dashboard() {
   const { collaborateurs, absences, evenements, candidats, demandes, documents } = useAppStore();
 
-  const absencesEnCours = absences.filter((a) => a.statut === "En cours").length;
+  const absencesEnCours = absences.filter(
+    (a) => a.dateDebut <= "2026-09-17" && a.dateFin >= "2026-09-17" && a.statut !== "Refusé",
+  ).length;
   const congesAttente = absences.filter((a) => a.statut === "En attente" && a.type === "Congé annuel").length;
   const evenementsAVenir = evenements.filter((e) => e.date >= "2026-09-17" && e.statut !== "Terminé").length;
   const documentsEcheance = documents.filter((d) => d.echeance && d.echeance <= "2026-10-17").length;
