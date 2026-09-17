@@ -88,9 +88,9 @@ function PageUtilisateurs() {
   const enregistrer = () => {
     if (!formulaire) return;
     const e: Record<string, string> = {};
-    if (!formulaire.nom.trim())  = "Le nom est obligatoire.";
-    if (!/^[^@\s]+@[^@\s]+\.[a-z]{2,}$/i.test(formulaire.email))  = "Adresse email invalide.";
-    if (!formulaire.service.trim())  = "Le service est obligatoire.";
+    if (!formulaire.nom.trim()) e["nom"] = "Le nom est obligatoire.";
+    if (!/^[^@\s]+@[^@\s]+\.[a-z]{2,}$/i.test(formulaire.email)) e["email"] = "Adresse email invalide.";
+    if (!formulaire.service.trim()) e["service"] = "Le service est obligatoire.";
     setErreurs(e);
     if (Object.keys(e).length > 0) return;
 

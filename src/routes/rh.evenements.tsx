@@ -55,7 +55,7 @@ function PageEvenements() {
     .slice(0, 4);
 
   const colonnes: Column<EvenementRH>[] = [
-    { key: "intitule", header: "Événement", sortValue: (e) => , render: (e) => <span className="font-medium">{}</span> },
+    { key: "intitule", header: "Événement", sortValue: (e) => e.intitule, render: (e) => <span className="font-medium">{e.intitule}</span> },
     {
       key: "collaborateur",
       header: "Collaborateur",
@@ -78,7 +78,7 @@ function PageEvenements() {
               variant="outline"
               onClick={() => {
                 majEvenement(e.id, { statut: "Terminé" });
-                toast.success("Événement clôturé", { description: `${} — ${nomComplet()}.` });
+                toast.success("Événement clôturé", { description: `${e.intitule} — ${nomComplet(e.collaborateurId)}.` });
               }}
             >
               <Check className="size-4" />
@@ -145,7 +145,7 @@ function PageEvenements() {
             columns={colonnes}
             rowKey={(e) => e.id}
             placeholderRecherche="Événement, collaborateur, responsable…"
-            recherche={(e, t) => `${} ${e.type} ${nomComplet()} ${e.responsable}`.toLowerCase().includes(t)}
+            recherche={(e, t) => `${e.intitule} ${e.type} ${nomComplet(e.collaborateurId)} ${e.responsable}`.toLowerCase().includes(t)}
             filtres={
               <>
                 <FiltreSelect valeur={type} onChange={setType} options={TYPES} libelle="Type" largeur="w-60" />
@@ -174,7 +174,7 @@ function PageEvenements() {
             onClose={() => setCreation(false)}
             onCreer={(e) => {
               ajouterEvenement(e);
-              toast.success("Événement planifié", { description: `${} — ${formatDate(e.date)}.` });
+              toast.success("Événement planifié", { description: `${e.intitule} — ${formatDate(e.date)}.` });
             }}
           />
         </DialogContent>
@@ -248,8 +248,8 @@ function FormulaireEvenement({
         <Button
           onClick={() => {
             const err: Record<string, string> = {};
-            if (!intitule.trim())  = "L'intitulé est obligatoire.";
-            if (!collaborateurId)  = "Sélectionnez un collaborateur.";
+            if (!intitule.trim()) err["intitule"] = "L'intitulé est obligatoire.";
+            if (!collaborateurId) err["collaborateurId"] = "Sélectionnez un collaborateur.";
             setErreurs(err);
             if (Object.keys(err).length > 0) {
               toast.error("Formulaire incomplet", { description: "Merci de corriger les champs signalés." });

@@ -61,11 +61,11 @@ export function FormulaireCollaborateur({
 
   const valider = () => {
     const e: Record<string, string> = {};
-    if (!valeurs.prenom.trim())  = "Le prénom est obligatoire.";
-    if (!valeurs.nom.trim())  = "Le nom est obligatoire.";
-    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(valeurs.email))  = "Adresse email invalide.";
-    if (!valeurs.fonction.trim())  = "La fonction est obligatoire.";
-    if (!valeurs.dateArrivee)  = "La date d'arrivée est obligatoire.";
+    if (!valeurs.prenom.trim()) e["prenom"] = "Le prénom est obligatoire.";
+    if (!valeurs.nom.trim()) e["nom"] = "Le nom est obligatoire.";
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(valeurs.email)) e["email"] = "Adresse email invalide.";
+    if (!valeurs.fonction.trim()) e["fonction"] = "La fonction est obligatoire.";
+    if (!valeurs.dateArrivee) e["dateArrivee"] = "La date d'arrivée est obligatoire.";
     setErreurs(e);
     return Object.keys(e).length === 0;
   };

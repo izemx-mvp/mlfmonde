@@ -283,10 +283,10 @@ function DialogueCreation({
 
   const soumettre = () => {
     const e: Record<string, string> = {};
-    if (!collaborateurId)  = "Sélectionnez un collaborateur.";
-    if (!debut)  = "Date de début obligatoire.";
-    if (!fin || fin < debut)  = "La date de fin doit suivre la date de début.";
-    if (!motif.trim())  = "Le motif est obligatoire.";
+    if (!collaborateurId) e["collaborateurId"] = "Sélectionnez un collaborateur.";
+    if (!debut) e["debut"] = "Date de début obligatoire.";
+    if (!fin || fin < debut) e["fin"] = "La date de fin doit suivre la date de début.";
+    if (!motif.trim()) e["motif"] = "Le motif est obligatoire.";
     setErreurs(e);
     if (Object.keys(e).length > 0) {
       toast.error("Formulaire incomplet", { description: "Merci de corriger les champs signalés." });
