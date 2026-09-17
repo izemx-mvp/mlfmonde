@@ -16,7 +16,7 @@ import { RechercheGlobale } from "./recherche-globale";
 import { CentreNotifications } from "./centre-notifications";
 import { TOUS_LES_LIENS } from "./navigation";
 import { UTILISATEUR_COURANT } from "@/data/mock";
-import { deconnecterLFILM } from "@/lib/auth.functions";
+import { fermerSessionLocale } from "@/lib/session-locale";
 import { toast } from "sonner";
 
 export function AppShell({ children }: { children: ReactNode }) {
@@ -31,7 +31,7 @@ export function AppShell({ children }: { children: ReactNode }) {
 
   async function fermerSession() {
     try {
-      await deconnecterLFILM();
+      fermerSessionLocale();
       toast.success("Déconnexion", { description: "Votre session est fermée." });
       await router.navigate({ to: "/connexion", replace: true });
     } catch {
