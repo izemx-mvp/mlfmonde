@@ -1,20 +1,13 @@
 import { useEffect, useState, type FormEvent } from "react";
-import { createFileRoute, redirect, useRouter } from "@tanstack/react-router";
-import { useServerFn } from "@tanstack/react-start";
+import { createFileRoute, useRouter } from "@tanstack/react-router";
 import { AlertCircle, LockKeyhole, Mail, ShieldCheck } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { connecterLFILM, verifierSessionLFILM } from "@/lib/auth.functions";
+import { IDENTIFIANTS_LFILM, ouvrirSession, verifierIdentifiants } from "@/lib/session-locale";
 import logoLfilm from "@/assets/lfilm-logo.png.asset.json";
 
 export const Route = createFileRoute("/connexion")({
-  beforeLoad: async () => {
-    const session = await verifierSessionLFILM();
-    if (session.connecte) {
-      throw redirect({ to: "/" });
-    }
-  },
   head: () => ({
     meta: [
       { title: "Connexion — LFILM Smart School" },
