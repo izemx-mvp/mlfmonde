@@ -1,4 +1,4 @@
-import { useState, type FormEvent } from "react";
+import { useEffect, useState, type FormEvent } from "react";
 import { createFileRoute, redirect, useRouter } from "@tanstack/react-router";
 import { AlertCircle, LockKeyhole, Mail, ShieldCheck } from "lucide-react";
 import { Button } from "@/components/ui/button";
@@ -37,6 +37,9 @@ function PageConnexion() {
   const [password, setPassword] = useState(IDENTIFIANTS_LFILM.password);
   const [erreur, setErreur] = useState("");
   const [chargement, setChargement] = useState(false);
+  const [pret, setPret] = useState(false);
+
+  useEffect(() => setPret(true), []);
 
   async function authentifier() {
     if (chargement) return;
@@ -125,8 +128,8 @@ function PageConnexion() {
                 </p>
               )}
 
-              <Button type="button" className="w-full" disabled={chargement} onClick={() => void authentifier()}>
-                {chargement ? "Connexion..." : "Se connecter"}
+              <Button type="submit" className="w-full" disabled={!pret || chargement}>
+                {!pret || chargement ? "Connexion..." : "Se connecter"}
               </Button>
             </form>
           </div>
