@@ -1,78 +1,56 @@
-import { createServerFn } from "@tanstack/react-start";
-import { useSession } from "@tanstack/react-start/server";
-import { createHash, timingSafeEqual } from "node:crypto";
-import { z } from "zod";
+const CLE_SESSION = "lfilm-smart-school-session";
+
+const EMAIL_ATTENDU = "mlfmonde@izemxlab.com";
+const MOT_DE_PASSE_ATTENDU = "mlfmonde2026@";
 
 type SessionLFILM = {
-  connecte?: boolean;
-  email?: string;
+  connecte: boolean;
+  email: string | null;
 };
 
-function configurationSession() {
-  const secret = process.env["LFILM_SESSION_SECRET"];
-  if (!secret) {
-    throw new Error("LFILM_SESSION_SECRET n'est pas configuré");
+function lireSession(): SessionLFILM {
+  if (typeof window === "undefined") {
+    return { connecte: false, email: null };
   }
 
-  return {
-    password: secret,
-    name: "lfilm-smart-school-session",
-    maxAge: 60 * 60 * 8,
-    cookie: {
-      httpOnly: true,
-      secure: process.env["NODE_ENV"] === "production",
-      sameSite: "lax" as const,
-      path: "/",
-    },
-  };
+  try {
+    const brut = window.localStorage.getItem(CLE_SESSION);
+    if (!brut) return { connecte: false, email: null };
+    const data = JSON.parse(brut) as Partial<SessionLFILM>;
+    return {
+      connecte: data.connecte === true,
+      email: typeof data.email === "string" ? data.email : null,
+    };
+  } catch {
+    return { connecte: false, email: null };
+  }
 }
 
-function comparerDeFaconSure(saisie: string, attendu: string) {
-  const a = createHash("sha256").update(saisie, "utf8").digest();
-  const b = createHash("sha256").update(attendu, "utf8").digest();
-  return timingSafeEqual(a, b);
+function ecrireSession(session: SessionLFILM) {
+  window.localStorage.setItem(CLE_SESSION, JSON.stringify(session));
 }
 
-export const verifierSessionLFILM = createServerFn({ method: "GET" }).handler(async () => {
-  const session = await useSession<SessionLFILM>(configurationSession());
-  return {
-    connecte: session.data.connecte === true,
-    email: session.data.email ?? null,
-  };
-});
+export async function verifierSessionLFILM() {
+  return lireSession();
+}
 
-export const connecterLFILM = createServerFn({ method: "POST" })
-  .inputValidator((data) =>
-    z
-      .object({
-        email: z.string().trim().email().max(255),
-        password: z.string().min(1).max(200),
-      })
-      .parse(data),
-  )
-  .handler(async ({ data }) => {
-    const emailAttendu = process.env["LFILM_LOGIN_EMAIL"];
-    const motDePasseAttendu = process.env["LFILM_LOGIN_PASSWORD"];
+export async function connecterLFILM(input: {
+  data: { email: string; password: string };
+}) {
+  const email = input.data.email.trim().toLowerCase();
+  const password = input.data.password;
 
-    if (!emailAttendu || !motDePasseAttendu) {
-      throw new Error("Les identifiants LFILM ne sont pas configurés");
-    }
+  if (email !== EMAIL_ATTENDU.toLowerCase() || password !== MOT_DE_PASSE_ATTENDU) {
+    return { ok: false as const };
+  }
 
-    const emailValide = comparerDeFaconSure(data.email.toLowerCase(), emailAttendu.toLowerCase());
-    const motDePasseValide = comparerDeFaconSure(data.password, motDePasseAttendu);
-
-    if (!emailValide || !motDePasseValide) {
-      return { ok: false as const };
-    }
-
-    const session = await useSession<SessionLFILM>(configurationSession());
-    await session.update({ connecte: true, email: emailAttendu });
-
-    return { ok: true as const };
-  });
-
-export const deconnecterLFILM = createServerFn({ method: "POST" }).handler(async () => {
-  const session = await useSession<SessionLFILM>(configurationSession());
-  await session.clear();
+  ecrireSession({ connecte: true, email: EMAIL_ATTENDU });
   return { ok: true as const };
-});
+}
+
+export async function deconnecterLFILM() {
+  if (typeof window !== "undefined") {
+    window.localStorage.removeItem(CLE_SESSION);
+  }
+  return { ok: true as const };
+}

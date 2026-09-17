@@ -1,6 +1,5 @@
 import { useState, type ReactNode } from "react";
 import { Link, useRouter, useRouterState } from "@tanstack/react-router";
-import { useServerFn } from "@tanstack/react-start";
 import { ChevronRight, LogOut, Menu, Settings, UserRound } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Sheet, SheetContent, SheetTitle, SheetTrigger } from "@/components/ui/sheet";
@@ -22,7 +21,6 @@ import { toast } from "sonner";
 
 export function AppShell({ children }: { children: ReactNode }) {
   const router = useRouter();
-  const deconnecter = useServerFn(deconnecterLFILM);
   const [reduite, setReduite] = useState(false);
   const [mobileOuvert, setMobileOuvert] = useState(false);
   const pathname = useRouterState({ select: (s) => s.location.pathname });
@@ -33,7 +31,7 @@ export function AppShell({ children }: { children: ReactNode }) {
 
   async function fermerSession() {
     try {
-      await deconnecter();
+      await deconnecterLFILM();
       toast.success("Déconnexion", { description: "Votre session est fermée." });
       await router.navigate({ to: "/connexion", replace: true });
     } catch {
