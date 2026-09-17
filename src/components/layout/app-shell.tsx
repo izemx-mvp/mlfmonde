@@ -1,5 +1,6 @@
 import { useState, type ReactNode } from "react";
 import { Link, useRouter, useRouterState } from "@tanstack/react-router";
+import { useServerFn } from "@tanstack/react-start";
 import { ChevronRight, LogOut, Menu, Settings, UserRound } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Sheet, SheetContent, SheetTitle, SheetTrigger } from "@/components/ui/sheet";
@@ -16,11 +17,12 @@ import { RechercheGlobale } from "./recherche-globale";
 import { CentreNotifications } from "./centre-notifications";
 import { TOUS_LES_LIENS } from "./navigation";
 import { UTILISATEUR_COURANT } from "@/data/mock";
-import { deconnecterLFILM } from "@/lib/auth";
+import { deconnecterLFILM } from "@/lib/auth.functions";
 import { toast } from "sonner";
 
 export function AppShell({ children }: { children: ReactNode }) {
   const router = useRouter();
+  const deconnecter = useServerFn(deconnecterLFILM);
   const [reduite, setReduite] = useState(false);
   const [mobileOuvert, setMobileOuvert] = useState(false);
   const pathname = useRouterState({ select: (s) => s.location.pathname });
@@ -30,9 +32,13 @@ export function AppShell({ children }: { children: ReactNode }) {
     TOUS_LES_LIENS[0]!;
 
   async function fermerSession() {
-    deconnecterLFILM();
-    toast.success("Déconnexion", { description: "Votre session est fermée." });
-    await router.navigate({ to: "/connexion", replace: true });
+    try {
+      await deconnecter();
+      toast.success("Déconnexion", { description: "Votre session est fermée." });
+      await router.navigate({ to: "/connexion", replace: true });
+    } catch {
+      toast.error("Déconnexion indisponible", { description: "Veuillez réessayer dans un instant." });
+    }
   }
 
   return (

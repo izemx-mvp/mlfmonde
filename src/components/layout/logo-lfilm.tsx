@@ -1,5 +1,5 @@
 import { cn } from "@/lib/utils";
-import logoLfilm from "@/assets/lfilm-logo.png";
+import logoLfilm from "@/assets/lfilm-logo.png.asset.json";
 
 export function LogoLfilm({ compact = false, sombre = true }: { compact?: boolean; sombre?: boolean }) {
   return (
@@ -12,7 +12,7 @@ export function LogoLfilm({ compact = false, sombre = true }: { compact?: boolea
         )}
       >
         <img
-          src={logoLfilm}
+          src={logoLfilm.url}
           alt="Lycée Français International Louis-Massignon"
           className="block h-full w-full object-contain"
         />

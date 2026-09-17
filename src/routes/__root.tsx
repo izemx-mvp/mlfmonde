@@ -17,7 +17,7 @@ import { AppShell } from "@/components/layout/app-shell";
 import { AppStoreProvider } from "@/store/app-store";
 import { Toaster } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
-import { verifierSessionLFILM } from "@/lib/auth";
+import { verifierSessionLFILM } from "@/lib/auth.functions";
 
 function NotFoundComponent() {
   return (
@@ -83,12 +83,7 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       return;
     }
 
-    // SPA prerender (Docker/nginx) has no browser session; gate on the client.
-    if (typeof window === "undefined") {
-      return;
-    }
-
-    const session = verifierSessionLFILM();
+    const session = await verifierSessionLFILM();
     if (!session.connecte) {
       throw redirect({ to: "/connexion" });
     }
