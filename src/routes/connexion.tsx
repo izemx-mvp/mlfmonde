@@ -62,33 +62,19 @@ function PageConnexion() {
   }
 
   return (
-    <main className="grid min-h-screen bg-surface lg:grid-cols-[minmax(0,0.9fr)_minmax(420px,1.1fr)]">
-      <section className="hidden bg-sidebar text-sidebar-foreground lg:flex lg:flex-col lg:justify-between">
-        <div className="h-1 lfilm-stripe" />
-        <div className="px-12">
-          <div className="inline-flex max-w-full rounded-lg border border-sidebar-border bg-background p-4 shadow-[var(--shadow-raised)]">
-            <img src={logoLfilm.url} alt="Lycée Français International Louis-Massignon" className="h-20 w-auto max-w-[260px] object-contain" />
-          </div>
-          <div className="mt-12 max-w-md">
-            <p className="text-xs font-semibold tracking-wider text-sidebar-foreground/65 uppercase">Accès privé</p>
-            <h1 className="mt-3 font-display text-4xl font-bold leading-tight text-sidebar-accent-foreground">
-              LFILM Smart School
-            </h1>
-            <p className="mt-4 text-sm leading-6 text-sidebar-foreground/75">
-              Plateforme intelligente de pilotage RH, demandes, recrutement et services scolaires du Lycée Français International Louis-Massignon.
-            </p>
-          </div>
-        </div>
-        <div className="px-12 pb-10 text-xs text-sidebar-foreground/60">Bouskoura – Ville Verte · Réseau mlfmonde / OSUI</div>
-      </section>
-
-      <section className="flex min-w-0 items-center justify-center px-4 py-8 sm:px-6 lg:px-10">
-        <div className="w-full max-w-md">
-          <div className="mb-8 flex justify-center lg:hidden">
+    <main className="flex min-h-screen items-center justify-center bg-surface px-4 py-10">
+      <section className="flex w-full max-w-md flex-col items-center">
+          <div className="mb-8 flex w-full justify-center">
             <div className="max-w-full rounded-lg border border-border bg-background p-3 shadow-[var(--shadow-card)]">
-              <img src={logoLfilm.url} alt="Lycée Français International Louis-Massignon" className="h-16 w-auto max-w-[220px] object-contain" />
+              <img
+                src={logoLfilm.url}
+                alt="Lycée Français International Louis-Massignon"
+                className="h-16 w-auto max-w-[220px] object-contain"
+              />
             </div>
           </div>
+        <div className="w-full">
+
 
           <div className="rounded-xl border border-border bg-card p-6 shadow-[var(--shadow-raised)] sm:p-8">
             <div className="mb-6">
