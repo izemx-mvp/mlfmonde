@@ -74,8 +74,6 @@ function PageConnexion() {
             </div>
           </div>
         <div className="w-full">
-
-
           <div className="rounded-xl border border-border bg-card p-6 shadow-[var(--shadow-raised)] sm:p-8">
             <div className="mb-6">
               <div className="mb-4 grid size-11 place-items-center rounded-lg bg-petrol text-petrol-foreground">
