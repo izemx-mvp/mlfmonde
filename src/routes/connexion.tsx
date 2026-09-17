@@ -1,16 +1,19 @@
 import { useState, type FormEvent } from "react";
 import { createFileRoute, redirect, useRouter } from "@tanstack/react-router";
-import { useServerFn } from "@tanstack/react-start";
 import { AlertCircle, LockKeyhole, Mail, ShieldCheck } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { connecterLFILM, verifierSessionLFILM } from "@/lib/auth.functions";
-import logoLfilm from "@/assets/lfilm-logo.png.asset.json";
+import { connecterLFILM, IDENTIFIANTS_LFILM, verifierSessionLFILM } from "@/lib/auth";
+import logoLfilm from "@/assets/lfilm-logo.png";
 
 export const Route = createFileRoute("/connexion")({
   beforeLoad: async () => {
-    const session = await verifierSessionLFILM();
+    if (typeof window === "undefined") {
+      return;
+    }
+
+    const session = verifierSessionLFILM();
     if (session.connecte) {
       throw redirect({ to: "/" });
     }
@@ -30,9 +33,8 @@ export const Route = createFileRoute("/connexion")({
 
 function PageConnexion() {
   const router = useRouter();
-  const connecter = useServerFn(connecterLFILM);
-  const [email, setEmail] = useState("mlfmonde@izemxlab.com");
-  const [password, setPassword] = useState("mlfmonde2026@");
+  const [email, setEmail] = useState(IDENTIFIANTS_LFILM.email);
+  const [password, setPassword] = useState(IDENTIFIANTS_LFILM.password);
   const [erreur, setErreur] = useState("");
   const [chargement, setChargement] = useState(false);
 
@@ -43,7 +45,7 @@ function PageConnexion() {
     setChargement(true);
 
     try {
-      const resultat = await connecter({ data: { email, password } });
+      const resultat = connecterLFILM({ email, password });
       if (!resultat.ok) {
         setErreur("Email ou mot de passe incorrect.");
         return;
@@ -67,7 +69,7 @@ function PageConnexion() {
           <div className="mb-8 flex w-full justify-center">
             <div className="max-w-full rounded-lg border border-border bg-background p-3 shadow-[var(--shadow-card)]">
               <img
-                src={logoLfilm.url}
+                src={logoLfilm}
                 alt="Lycée Français International Louis-Massignon"
                 className="h-16 w-auto max-w-[220px] object-contain"
               />
