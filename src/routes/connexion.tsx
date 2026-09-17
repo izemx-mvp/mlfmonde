@@ -123,7 +123,7 @@ function PageConnexion() {
                 </p>
               )}
 
-              <Button type="button" className="w-full" disabled={chargement} onClick={() => void authentifier()}>
+              <Button type="submit" className="w-full" disabled={chargement}>
                 {chargement ? "Connexion..." : "Se connecter"}
               </Button>
             </form>
