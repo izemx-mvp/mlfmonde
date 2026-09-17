@@ -1,20 +1,13 @@
 import { useEffect, useState, type FormEvent } from "react";
-import { createFileRoute, redirect, useRouter } from "@tanstack/react-router";
-import { useServerFn } from "@tanstack/react-start";
+import { createFileRoute, useRouter } from "@tanstack/react-router";
 import { AlertCircle, LockKeyhole, Mail, ShieldCheck } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { connecterLFILM, verifierSessionLFILM } from "@/lib/auth.functions";
+import { IDENTIFIANTS_LFILM, ouvrirSession, verifierIdentifiants } from "@/lib/session-locale";
 import logoLfilm from "@/assets/lfilm-logo.png.asset.json";
 
 export const Route = createFileRoute("/connexion")({
-  beforeLoad: async () => {
-    const session = await verifierSessionLFILM();
-    if (session.connecte) {
-      throw redirect({ to: "/" });
-    }
-  },
   head: () => ({
     meta: [
       { title: "Connexion — LFILM Smart School" },
@@ -30,9 +23,8 @@ export const Route = createFileRoute("/connexion")({
 
 function PageConnexion() {
   const router = useRouter();
-  const connecter = useServerFn(connecterLFILM);
-  const [email, setEmail] = useState("mlfmonde@izemxlab.com");
-  const [password, setPassword] = useState("mlfmonde2026@");
+  const [email, setEmail] = useState(IDENTIFIANTS_LFILM.email);
+  const [password, setPassword] = useState(IDENTIFIANTS_LFILM.password);
   const [erreur, setErreur] = useState("");
   const [chargement, setChargement] = useState(false);
   const [pret, setPret] = useState(false);
@@ -46,14 +38,12 @@ function PageConnexion() {
     setChargement(true);
 
     try {
-      const resultat = await connecter({ data: { email, password } });
-      if (!resultat.ok) {
+      if (!verifierIdentifiants(email, password)) {
         setErreur("Email ou mot de passe incorrect.");
         return;
       }
+      ouvrirSession();
       await router.navigate({ to: "/" });
-    } catch {
-      setErreur("Connexion indisponible pour le moment.");
     } finally {
       setChargement(false);
     }
