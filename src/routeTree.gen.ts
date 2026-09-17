@@ -10,12 +10,57 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as DocumentsRouteImport } from './routes/documents'
+import { Route as OnboardingRouteImport } from './routes/onboarding'
+import { Route as RecrutementCandidaturesRouteImport } from './routes/recrutement.candidatures'
+import { Route as RecrutementEntretiensRouteImport } from './routes/recrutement.entretiens'
+import { Route as RecrutementPipelineRouteImport } from './routes/recrutement.pipeline'
+import { Route as RecrutementScreeningRouteImport } from './routes/recrutement.screening'
+import { Route as RhAbsencesRouteImport } from './routes/rh.absences'
 import { Route as RhCommandCenterRouteImport } from './routes/rh.command-center'
+import { Route as RhEvenementsRouteImport } from './routes/rh.evenements'
+import { Route as RhInsightsRouteImport } from './routes/rh.insights'
 import { Route as RhCollaborateursIndexRouteImport } from './routes/rh.collaborateurs.index'
+import { Route as RhCollaborateursIdRouteImport } from './routes/rh.collaborateurs.$id'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const DocumentsRoute = DocumentsRouteImport.update({
+  id: '/documents',
+  path: '/documents',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const OnboardingRoute = OnboardingRouteImport.update({
+  id: '/onboarding',
+  path: '/onboarding',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const RecrutementCandidaturesRoute = RecrutementCandidaturesRouteImport.update({
+  id: '/recrutement/candidatures',
+  path: '/recrutement/candidatures',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const RecrutementEntretiensRoute = RecrutementEntretiensRouteImport.update({
+  id: '/recrutement/entretiens',
+  path: '/recrutement/entretiens',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const RecrutementPipelineRoute = RecrutementPipelineRouteImport.update({
+  id: '/recrutement/pipeline',
+  path: '/recrutement/pipeline',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const RecrutementScreeningRoute = RecrutementScreeningRouteImport.update({
+  id: '/recrutement/screening',
+  path: '/recrutement/screening',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const RhAbsencesRoute = RhAbsencesRouteImport.update({
+  id: '/rh/absences',
+  path: '/rh/absences',
   getParentRoute: () => rootRouteImport,
 } as any)
 const RhCommandCenterRoute = RhCommandCenterRouteImport.update({
@@ -23,39 +68,134 @@ const RhCommandCenterRoute = RhCommandCenterRouteImport.update({
   path: '/rh/command-center',
   getParentRoute: () => rootRouteImport,
 } as any)
+const RhEvenementsRoute = RhEvenementsRouteImport.update({
+  id: '/rh/evenements',
+  path: '/rh/evenements',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const RhInsightsRoute = RhInsightsRouteImport.update({
+  id: '/rh/insights',
+  path: '/rh/insights',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const RhCollaborateursIndexRoute = RhCollaborateursIndexRouteImport.update({
   id: '/rh/collaborateurs/',
   path: '/rh/collaborateurs/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const RhCollaborateursIdRoute = RhCollaborateursIdRouteImport.update({
+  id: '/rh/collaborateurs/$id',
+  path: '/rh/collaborateurs/$id',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/documents': typeof DocumentsRoute
+  '/onboarding': typeof OnboardingRoute
+  '/recrutement/candidatures': typeof RecrutementCandidaturesRoute
+  '/recrutement/entretiens': typeof RecrutementEntretiensRoute
+  '/recrutement/pipeline': typeof RecrutementPipelineRoute
+  '/recrutement/screening': typeof RecrutementScreeningRoute
+  '/rh/absences': typeof RhAbsencesRoute
   '/rh/command-center': typeof RhCommandCenterRoute
+  '/rh/evenements': typeof RhEvenementsRoute
+  '/rh/insights': typeof RhInsightsRoute
+  '/rh/collaborateurs/$id': typeof RhCollaborateursIdRoute
   '/rh/collaborateurs/': typeof RhCollaborateursIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/documents': typeof DocumentsRoute
+  '/onboarding': typeof OnboardingRoute
+  '/recrutement/candidatures': typeof RecrutementCandidaturesRoute
+  '/recrutement/entretiens': typeof RecrutementEntretiensRoute
+  '/recrutement/pipeline': typeof RecrutementPipelineRoute
+  '/recrutement/screening': typeof RecrutementScreeningRoute
+  '/rh/absences': typeof RhAbsencesRoute
   '/rh/command-center': typeof RhCommandCenterRoute
+  '/rh/evenements': typeof RhEvenementsRoute
+  '/rh/insights': typeof RhInsightsRoute
+  '/rh/collaborateurs/$id': typeof RhCollaborateursIdRoute
   '/rh/collaborateurs': typeof RhCollaborateursIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/documents': typeof DocumentsRoute
+  '/onboarding': typeof OnboardingRoute
+  '/recrutement/candidatures': typeof RecrutementCandidaturesRoute
+  '/recrutement/entretiens': typeof RecrutementEntretiensRoute
+  '/recrutement/pipeline': typeof RecrutementPipelineRoute
+  '/recrutement/screening': typeof RecrutementScreeningRoute
+  '/rh/absences': typeof RhAbsencesRoute
   '/rh/command-center': typeof RhCommandCenterRoute
+  '/rh/evenements': typeof RhEvenementsRoute
+  '/rh/insights': typeof RhInsightsRoute
+  '/rh/collaborateurs/$id': typeof RhCollaborateursIdRoute
   '/rh/collaborateurs/': typeof RhCollaborateursIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/rh/command-center' | '/rh/collaborateurs/'
+  fullPaths:
+    | '/'
+    | '/documents'
+    | '/onboarding'
+    | '/recrutement/candidatures'
+    | '/recrutement/entretiens'
+    | '/recrutement/pipeline'
+    | '/recrutement/screening'
+    | '/rh/absences'
+    | '/rh/command-center'
+    | '/rh/evenements'
+    | '/rh/insights'
+    | '/rh/collaborateurs/$id'
+    | '/rh/collaborateurs/'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/rh/command-center' | '/rh/collaborateurs'
-  id: '__root__' | '/' | '/rh/command-center' | '/rh/collaborateurs/'
+  to:
+    | '/'
+    | '/documents'
+    | '/onboarding'
+    | '/recrutement/candidatures'
+    | '/recrutement/entretiens'
+    | '/recrutement/pipeline'
+    | '/recrutement/screening'
+    | '/rh/absences'
+    | '/rh/command-center'
+    | '/rh/evenements'
+    | '/rh/insights'
+    | '/rh/collaborateurs/$id'
+    | '/rh/collaborateurs'
+  id:
+    | '__root__'
+    | '/'
+    | '/documents'
+    | '/onboarding'
+    | '/recrutement/candidatures'
+    | '/recrutement/entretiens'
+    | '/recrutement/pipeline'
+    | '/recrutement/screening'
+    | '/rh/absences'
+    | '/rh/command-center'
+    | '/rh/evenements'
+    | '/rh/insights'
+    | '/rh/collaborateurs/$id'
+    | '/rh/collaborateurs/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  DocumentsRoute: typeof DocumentsRoute
+  OnboardingRoute: typeof OnboardingRoute
+  RecrutementCandidaturesRoute: typeof RecrutementCandidaturesRoute
+  RecrutementEntretiensRoute: typeof RecrutementEntretiensRoute
+  RecrutementPipelineRoute: typeof RecrutementPipelineRoute
+  RecrutementScreeningRoute: typeof RecrutementScreeningRoute
+  RhAbsencesRoute: typeof RhAbsencesRoute
   RhCommandCenterRoute: typeof RhCommandCenterRoute
+  RhEvenementsRoute: typeof RhEvenementsRoute
+  RhInsightsRoute: typeof RhInsightsRoute
+  RhCollaborateursIdRoute: typeof RhCollaborateursIdRoute
   RhCollaborateursIndexRoute: typeof RhCollaborateursIndexRoute
 }
 
@@ -68,11 +208,74 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/documents': {
+      id: '/documents'
+      path: '/documents'
+      fullPath: '/documents'
+      preLoaderRoute: typeof DocumentsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/onboarding': {
+      id: '/onboarding'
+      path: '/onboarding'
+      fullPath: '/onboarding'
+      preLoaderRoute: typeof OnboardingRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/recrutement/candidatures': {
+      id: '/recrutement/candidatures'
+      path: '/recrutement/candidatures'
+      fullPath: '/recrutement/candidatures'
+      preLoaderRoute: typeof RecrutementCandidaturesRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/recrutement/entretiens': {
+      id: '/recrutement/entretiens'
+      path: '/recrutement/entretiens'
+      fullPath: '/recrutement/entretiens'
+      preLoaderRoute: typeof RecrutementEntretiensRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/recrutement/pipeline': {
+      id: '/recrutement/pipeline'
+      path: '/recrutement/pipeline'
+      fullPath: '/recrutement/pipeline'
+      preLoaderRoute: typeof RecrutementPipelineRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/recrutement/screening': {
+      id: '/recrutement/screening'
+      path: '/recrutement/screening'
+      fullPath: '/recrutement/screening'
+      preLoaderRoute: typeof RecrutementScreeningRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/rh/absences': {
+      id: '/rh/absences'
+      path: '/rh/absences'
+      fullPath: '/rh/absences'
+      preLoaderRoute: typeof RhAbsencesRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/rh/command-center': {
       id: '/rh/command-center'
       path: '/rh/command-center'
       fullPath: '/rh/command-center'
       preLoaderRoute: typeof RhCommandCenterRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/rh/evenements': {
+      id: '/rh/evenements'
+      path: '/rh/evenements'
+      fullPath: '/rh/evenements'
+      preLoaderRoute: typeof RhEvenementsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/rh/insights': {
+      id: '/rh/insights'
+      path: '/rh/insights'
+      fullPath: '/rh/insights'
+      preLoaderRoute: typeof RhInsightsRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/rh/collaborateurs/': {
@@ -82,12 +285,29 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof RhCollaborateursIndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/rh/collaborateurs/$id': {
+      id: '/rh/collaborateurs/$id'
+      path: '/rh/collaborateurs/$id'
+      fullPath: '/rh/collaborateurs/$id'
+      preLoaderRoute: typeof RhCollaborateursIdRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  DocumentsRoute: DocumentsRoute,
+  OnboardingRoute: OnboardingRoute,
+  RecrutementCandidaturesRoute: RecrutementCandidaturesRoute,
+  RecrutementEntretiensRoute: RecrutementEntretiensRoute,
+  RecrutementPipelineRoute: RecrutementPipelineRoute,
+  RecrutementScreeningRoute: RecrutementScreeningRoute,
+  RhAbsencesRoute: RhAbsencesRoute,
   RhCommandCenterRoute: RhCommandCenterRoute,
+  RhEvenementsRoute: RhEvenementsRoute,
+  RhInsightsRoute: RhInsightsRoute,
+  RhCollaborateursIdRoute: RhCollaborateursIdRoute,
   RhCollaborateursIndexRoute: RhCollaborateursIndexRoute,
 }
 export const routeTree = rootRouteImport
