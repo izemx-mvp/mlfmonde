@@ -95,7 +95,7 @@ function PageCollaborateurs() {
                 <Pencil className="size-4" />
                 Modifier
               </DropdownMenuItem>
-              <DropdownMenuItem variant="destructive" onSelect={() => setASupprimer(c)}>
+              <DropdownMenuItem className="text-brick focus:text-brick" onSelect={() => setASupprimer(c)}>
                 <Trash2 className="size-4" />
                 Supprimer
               </DropdownMenuItem>

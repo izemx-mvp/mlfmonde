@@ -24,8 +24,8 @@ interface DataTableProps<T> {
   actionsGlobales?: ReactNode;
   parPage?: number;
   onRowClick?: (row: T) => void;
-  emptyTitre?: string;
-  emptyDescription?: string;
+  emptyTitre?: string | undefined;
+  emptyDescription?: string | undefined;
 }
 
 export function DataTable<T>({

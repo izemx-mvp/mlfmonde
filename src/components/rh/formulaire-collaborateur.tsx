@@ -28,7 +28,7 @@ export function FormulaireCollaborateur({
   onClose,
 }: {
   ouvert: boolean;
-  collaborateur?: Collaborateur;
+  collaborateur?: Collaborateur | undefined;
   onClose: () => void;
 }) {
   const { ajouterCollaborateur, majCollaborateur, ajouterNotification } = useAppStore();
