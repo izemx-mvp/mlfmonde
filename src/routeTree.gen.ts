@@ -12,6 +12,8 @@ import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as DocumentsRouteImport } from './routes/documents'
 import { Route as OnboardingRouteImport } from './routes/onboarding'
+import { Route as AssistantsEmployeRouteImport } from './routes/assistants.employe'
+import { Route as AssistantsServiceEcoleRouteImport } from './routes/assistants.service-ecole'
 import { Route as RecrutementCandidaturesRouteImport } from './routes/recrutement.candidatures'
 import { Route as RecrutementEntretiensRouteImport } from './routes/recrutement.entretiens'
 import { Route as RecrutementPipelineRouteImport } from './routes/recrutement.pipeline'
@@ -36,6 +38,16 @@ const DocumentsRoute = DocumentsRouteImport.update({
 const OnboardingRoute = OnboardingRouteImport.update({
   id: '/onboarding',
   path: '/onboarding',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AssistantsEmployeRoute = AssistantsEmployeRouteImport.update({
+  id: '/assistants/employe',
+  path: '/assistants/employe',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AssistantsServiceEcoleRoute = AssistantsServiceEcoleRouteImport.update({
+  id: '/assistants/service-ecole',
+  path: '/assistants/service-ecole',
   getParentRoute: () => rootRouteImport,
 } as any)
 const RecrutementCandidaturesRoute = RecrutementCandidaturesRouteImport.update({
@@ -93,6 +105,8 @@ export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/documents': typeof DocumentsRoute
   '/onboarding': typeof OnboardingRoute
+  '/assistants/employe': typeof AssistantsEmployeRoute
+  '/assistants/service-ecole': typeof AssistantsServiceEcoleRoute
   '/recrutement/candidatures': typeof RecrutementCandidaturesRoute
   '/recrutement/entretiens': typeof RecrutementEntretiensRoute
   '/recrutement/pipeline': typeof RecrutementPipelineRoute
@@ -108,6 +122,8 @@ export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/documents': typeof DocumentsRoute
   '/onboarding': typeof OnboardingRoute
+  '/assistants/employe': typeof AssistantsEmployeRoute
+  '/assistants/service-ecole': typeof AssistantsServiceEcoleRoute
   '/recrutement/candidatures': typeof RecrutementCandidaturesRoute
   '/recrutement/entretiens': typeof RecrutementEntretiensRoute
   '/recrutement/pipeline': typeof RecrutementPipelineRoute
@@ -124,6 +140,8 @@ export interface FileRoutesById {
   '/': typeof IndexRoute
   '/documents': typeof DocumentsRoute
   '/onboarding': typeof OnboardingRoute
+  '/assistants/employe': typeof AssistantsEmployeRoute
+  '/assistants/service-ecole': typeof AssistantsServiceEcoleRoute
   '/recrutement/candidatures': typeof RecrutementCandidaturesRoute
   '/recrutement/entretiens': typeof RecrutementEntretiensRoute
   '/recrutement/pipeline': typeof RecrutementPipelineRoute
@@ -141,6 +159,8 @@ export interface FileRouteTypes {
     | '/'
     | '/documents'
     | '/onboarding'
+    | '/assistants/employe'
+    | '/assistants/service-ecole'
     | '/recrutement/candidatures'
     | '/recrutement/entretiens'
     | '/recrutement/pipeline'
@@ -156,6 +176,8 @@ export interface FileRouteTypes {
     | '/'
     | '/documents'
     | '/onboarding'
+    | '/assistants/employe'
+    | '/assistants/service-ecole'
     | '/recrutement/candidatures'
     | '/recrutement/entretiens'
     | '/recrutement/pipeline'
@@ -171,6 +193,8 @@ export interface FileRouteTypes {
     | '/'
     | '/documents'
     | '/onboarding'
+    | '/assistants/employe'
+    | '/assistants/service-ecole'
     | '/recrutement/candidatures'
     | '/recrutement/entretiens'
     | '/recrutement/pipeline'
@@ -187,6 +211,8 @@ export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   DocumentsRoute: typeof DocumentsRoute
   OnboardingRoute: typeof OnboardingRoute
+  AssistantsEmployeRoute: typeof AssistantsEmployeRoute
+  AssistantsServiceEcoleRoute: typeof AssistantsServiceEcoleRoute
   RecrutementCandidaturesRoute: typeof RecrutementCandidaturesRoute
   RecrutementEntretiensRoute: typeof RecrutementEntretiensRoute
   RecrutementPipelineRoute: typeof RecrutementPipelineRoute
@@ -220,6 +246,20 @@ declare module '@tanstack/react-router' {
       path: '/onboarding'
       fullPath: '/onboarding'
       preLoaderRoute: typeof OnboardingRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/assistants/employe': {
+      id: '/assistants/employe'
+      path: '/assistants/employe'
+      fullPath: '/assistants/employe'
+      preLoaderRoute: typeof AssistantsEmployeRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/assistants/service-ecole': {
+      id: '/assistants/service-ecole'
+      path: '/assistants/service-ecole'
+      fullPath: '/assistants/service-ecole'
+      preLoaderRoute: typeof AssistantsServiceEcoleRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/recrutement/candidatures': {
@@ -299,6 +339,8 @@ const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   DocumentsRoute: DocumentsRoute,
   OnboardingRoute: OnboardingRoute,
+  AssistantsEmployeRoute: AssistantsEmployeRoute,
+  AssistantsServiceEcoleRoute: AssistantsServiceEcoleRoute,
   RecrutementCandidaturesRoute: RecrutementCandidaturesRoute,
   RecrutementEntretiensRoute: RecrutementEntretiensRoute,
   RecrutementPipelineRoute: RecrutementPipelineRoute,
