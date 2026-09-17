@@ -6,9 +6,9 @@ export function EmptyState({
   description = "Aucun élément ne correspond à vos critères de recherche ou de filtre.",
   action,
 }: {
-  titre?: string;
-  description?: string;
-  action?: ReactNode;
+  titre?: string | undefined;
+  description?: string | undefined;
+  action?: ReactNode | undefined;
 }) {
   return (
     <div className="flex flex-col items-center justify-center gap-3 px-6 py-14 text-center">
