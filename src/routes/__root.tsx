@@ -78,27 +78,6 @@ function ErrorComponent({ error, reset }: { error: Error; reset: () => void }) {
 }
 
 export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()({
-  beforeLoad: async ({ location }) => {
-    if (location.pathname === "/connexion") {
-      return;
-    }
-
-    let connecte = false;
-    try {
-      const session = await verifierSessionLFILM();
-      connecte = session.connecte;
-    } catch (erreur) {
-      if (erreur instanceof Response || (erreur as { isRedirect?: boolean })?.isRedirect) {
-        throw erreur;
-      }
-      // Réseau indisponible (rechargement du serveur) : on renvoie vers la connexion
-      connecte = false;
-    }
-
-    if (!connecte) {
-      throw redirect({ to: "/connexion" });
-    }
-  },
   head: () => ({
     meta: [
       { charSet: "utf-8" },
@@ -148,7 +127,15 @@ function RootShell({ children }: { children: ReactNode }) {
 
 function RootComponent() {
   const { queryClient } = Route.useRouteContext();
+  const router = useRouter();
   const pathname = useRouterState({ select: (s) => s.location.pathname });
+
+  useEffect(() => {
+    if (pathname !== "/connexion" && !sessionOuverte()) {
+      void router.navigate({ to: "/connexion", replace: true });
+    }
+  }, [pathname, router]);
+
 
   return (
     <QueryClientProvider client={queryClient}>
