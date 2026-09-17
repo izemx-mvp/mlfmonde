@@ -15,6 +15,8 @@ import { Route as OnboardingRouteImport } from './routes/onboarding'
 import { Route as AssistantsEmployeRouteImport } from './routes/assistants.employe'
 import { Route as AssistantsServiceEcoleRouteImport } from './routes/assistants.service-ecole'
 import { Route as DemandesIndexRouteImport } from './routes/demandes.index'
+import { Route as DemandesConversationsRouteImport } from './routes/demandes.conversations'
+import { Route as DemandesEmailsRouteImport } from './routes/demandes.emails'
 import { Route as DemandesReclamationsRouteImport } from './routes/demandes.reclamations'
 import { Route as RecrutementCandidaturesRouteImport } from './routes/recrutement.candidatures'
 import { Route as RecrutementEntretiensRouteImport } from './routes/recrutement.entretiens'
@@ -55,6 +57,16 @@ const AssistantsServiceEcoleRoute = AssistantsServiceEcoleRouteImport.update({
 const DemandesIndexRoute = DemandesIndexRouteImport.update({
   id: '/demandes/',
   path: '/demandes/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const DemandesConversationsRoute = DemandesConversationsRouteImport.update({
+  id: '/demandes/conversations',
+  path: '/demandes/conversations',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const DemandesEmailsRoute = DemandesEmailsRouteImport.update({
+  id: '/demandes/emails',
+  path: '/demandes/emails',
   getParentRoute: () => rootRouteImport,
 } as any)
 const DemandesReclamationsRoute = DemandesReclamationsRouteImport.update({
@@ -119,6 +131,8 @@ export interface FileRoutesByFullPath {
   '/onboarding': typeof OnboardingRoute
   '/assistants/employe': typeof AssistantsEmployeRoute
   '/assistants/service-ecole': typeof AssistantsServiceEcoleRoute
+  '/demandes/conversations': typeof DemandesConversationsRoute
+  '/demandes/emails': typeof DemandesEmailsRoute
   '/demandes/reclamations': typeof DemandesReclamationsRoute
   '/recrutement/candidatures': typeof RecrutementCandidaturesRoute
   '/recrutement/entretiens': typeof RecrutementEntretiensRoute
@@ -138,6 +152,8 @@ export interface FileRoutesByTo {
   '/onboarding': typeof OnboardingRoute
   '/assistants/employe': typeof AssistantsEmployeRoute
   '/assistants/service-ecole': typeof AssistantsServiceEcoleRoute
+  '/demandes/conversations': typeof DemandesConversationsRoute
+  '/demandes/emails': typeof DemandesEmailsRoute
   '/demandes/reclamations': typeof DemandesReclamationsRoute
   '/recrutement/candidatures': typeof RecrutementCandidaturesRoute
   '/recrutement/entretiens': typeof RecrutementEntretiensRoute
@@ -158,6 +174,8 @@ export interface FileRoutesById {
   '/onboarding': typeof OnboardingRoute
   '/assistants/employe': typeof AssistantsEmployeRoute
   '/assistants/service-ecole': typeof AssistantsServiceEcoleRoute
+  '/demandes/conversations': typeof DemandesConversationsRoute
+  '/demandes/emails': typeof DemandesEmailsRoute
   '/demandes/reclamations': typeof DemandesReclamationsRoute
   '/recrutement/candidatures': typeof RecrutementCandidaturesRoute
   '/recrutement/entretiens': typeof RecrutementEntretiensRoute
@@ -179,6 +197,8 @@ export interface FileRouteTypes {
     | '/onboarding'
     | '/assistants/employe'
     | '/assistants/service-ecole'
+    | '/demandes/conversations'
+    | '/demandes/emails'
     | '/demandes/reclamations'
     | '/recrutement/candidatures'
     | '/recrutement/entretiens'
@@ -198,6 +218,8 @@ export interface FileRouteTypes {
     | '/onboarding'
     | '/assistants/employe'
     | '/assistants/service-ecole'
+    | '/demandes/conversations'
+    | '/demandes/emails'
     | '/demandes/reclamations'
     | '/recrutement/candidatures'
     | '/recrutement/entretiens'
@@ -217,6 +239,8 @@ export interface FileRouteTypes {
     | '/onboarding'
     | '/assistants/employe'
     | '/assistants/service-ecole'
+    | '/demandes/conversations'
+    | '/demandes/emails'
     | '/demandes/reclamations'
     | '/recrutement/candidatures'
     | '/recrutement/entretiens'
@@ -237,6 +261,8 @@ export interface RootRouteChildren {
   OnboardingRoute: typeof OnboardingRoute
   AssistantsEmployeRoute: typeof AssistantsEmployeRoute
   AssistantsServiceEcoleRoute: typeof AssistantsServiceEcoleRoute
+  DemandesConversationsRoute: typeof DemandesConversationsRoute
+  DemandesEmailsRoute: typeof DemandesEmailsRoute
   DemandesReclamationsRoute: typeof DemandesReclamationsRoute
   RecrutementCandidaturesRoute: typeof RecrutementCandidaturesRoute
   RecrutementEntretiensRoute: typeof RecrutementEntretiensRoute
@@ -293,6 +319,20 @@ declare module '@tanstack/react-router' {
       path: '/demandes'
       fullPath: '/demandes/'
       preLoaderRoute: typeof DemandesIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/demandes/conversations': {
+      id: '/demandes/conversations'
+      path: '/demandes/conversations'
+      fullPath: '/demandes/conversations'
+      preLoaderRoute: typeof DemandesConversationsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/demandes/emails': {
+      id: '/demandes/emails'
+      path: '/demandes/emails'
+      fullPath: '/demandes/emails'
+      preLoaderRoute: typeof DemandesEmailsRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/demandes/reclamations': {
@@ -381,6 +421,8 @@ const rootRouteChildren: RootRouteChildren = {
   OnboardingRoute: OnboardingRoute,
   AssistantsEmployeRoute: AssistantsEmployeRoute,
   AssistantsServiceEcoleRoute: AssistantsServiceEcoleRoute,
+  DemandesConversationsRoute: DemandesConversationsRoute,
+  DemandesEmailsRoute: DemandesEmailsRoute,
   DemandesReclamationsRoute: DemandesReclamationsRoute,
   RecrutementCandidaturesRoute: RecrutementCandidaturesRoute,
   RecrutementEntretiensRoute: RecrutementEntretiensRoute,
