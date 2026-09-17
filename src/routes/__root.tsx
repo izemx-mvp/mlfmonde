@@ -3,7 +3,9 @@ import {
   Outlet,
   Link,
   createRootRouteWithContext,
+  redirect,
   useRouter,
+  useRouterState,
   HeadContent,
   Scripts,
 } from "@tanstack/react-router";
@@ -15,6 +17,7 @@ import { AppShell } from "@/components/layout/app-shell";
 import { AppStoreProvider } from "@/store/app-store";
 import { Toaster } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
+import { verifierSessionLFILM } from "@/lib/auth.functions";
 
 function NotFoundComponent() {
   return (
@@ -75,6 +78,16 @@ function ErrorComponent({ error, reset }: { error: Error; reset: () => void }) {
 }
 
 export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()({
+  beforeLoad: async ({ location }) => {
+    if (location.pathname === "/connexion") {
+      return;
+    }
+
+    const session = await verifierSessionLFILM();
+    if (!session.connecte) {
+      throw redirect({ to: "/connexion" });
+    }
+  },
   head: () => ({
     meta: [
       { charSet: "utf-8" },
@@ -99,7 +112,7 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
         rel: "stylesheet",
         href: "https://fonts.googleapis.com/css2?family=Archivo:wght@500;600;700;800&family=Barlow:wght@400;500;600;700&display=swap",
       },
-      { rel: "icon", href: "/favicon.ico", type: "image/x-icon" },
+      { rel: "icon", href: "/favicon.png", type: "image/png" },
     ],
   }),
   shellComponent: RootShell,
@@ -124,15 +137,20 @@ function RootShell({ children }: { children: ReactNode }) {
 
 function RootComponent() {
   const { queryClient } = Route.useRouteContext();
+  const pathname = useRouterState({ select: (s) => s.location.pathname });
 
   return (
     <QueryClientProvider client={queryClient}>
       <AppStoreProvider>
         <TooltipProvider delayDuration={200}>
-          <AppShell>
-            {/* Required: nested routes render here. Removing <Outlet /> breaks all child routes. */}
+          {pathname === "/connexion" ? (
             <Outlet />
-          </AppShell>
+          ) : (
+            <AppShell>
+              {/* Required: nested routes render here. Removing <Outlet /> breaks all child routes. */}
+              <Outlet />
+            </AppShell>
+          )}
           <Toaster position="top-right" richColors />
         </TooltipProvider>
       </AppStoreProvider>

@@ -56,6 +56,8 @@ export const Route = createFileRoute("/")({
       },
       { property: "og:title", content: "Tableau de bord — LFILM Smart School" },
       { property: "og:description", content: "Pilotage RH et services intelligents du LFILM Bouskoura." },
+      { property: "og:type", content: "website" },
+      { name: "twitter:card", content: "summary_large_image" },
     ],
   }),
   component: Dashboard,

@@ -10,12 +10,18 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as ConnexionRouteImport } from './routes/connexion'
 import { Route as DocumentsRouteImport } from './routes/documents'
 import { Route as OnboardingRouteImport } from './routes/onboarding'
 import { Route as AdministrationParametresRouteImport } from './routes/administration.parametres'
 import { Route as AdministrationUtilisateursRouteImport } from './routes/administration.utilisateurs'
 import { Route as AssistantsEmployeRouteImport } from './routes/assistants.employe'
 import { Route as AssistantsServiceEcoleRouteImport } from './routes/assistants.service-ecole'
+import { Route as ConfigurationIaAgentsRouteImport } from './routes/configuration-ia.agents'
+import { Route as ConfigurationIaBaseConnaissancesRouteImport } from './routes/configuration-ia.base-connaissances'
+import { Route as ConfigurationIaFaqRouteImport } from './routes/configuration-ia.faq'
+import { Route as ConfigurationIaModelesDocumentsRouteImport } from './routes/configuration-ia.modeles-documents'
+import { Route as ConfigurationIaParametresRouteImport } from './routes/configuration-ia.parametres'
 import { Route as DemandesIndexRouteImport } from './routes/demandes.index'
 import { Route as DemandesConversationsRouteImport } from './routes/demandes.conversations'
 import { Route as DemandesEmailsRouteImport } from './routes/demandes.emails'
@@ -34,6 +40,11 @@ import { Route as RhCollaborateursIdRouteImport } from './routes/rh.collaborateu
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ConnexionRoute = ConnexionRouteImport.update({
+  id: '/connexion',
+  path: '/connexion',
   getParentRoute: () => rootRouteImport,
 } as any)
 const DocumentsRoute = DocumentsRouteImport.update({
@@ -68,6 +79,34 @@ const AssistantsServiceEcoleRoute = AssistantsServiceEcoleRouteImport.update({
   path: '/assistants/service-ecole',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ConfigurationIaAgentsRoute = ConfigurationIaAgentsRouteImport.update({
+  id: '/configuration-ia/agents',
+  path: '/configuration-ia/agents',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ConfigurationIaBaseConnaissancesRoute =
+  ConfigurationIaBaseConnaissancesRouteImport.update({
+    id: '/configuration-ia/base-connaissances',
+    path: '/configuration-ia/base-connaissances',
+    getParentRoute: () => rootRouteImport,
+  } as any)
+const ConfigurationIaFaqRoute = ConfigurationIaFaqRouteImport.update({
+  id: '/configuration-ia/faq',
+  path: '/configuration-ia/faq',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ConfigurationIaModelesDocumentsRoute =
+  ConfigurationIaModelesDocumentsRouteImport.update({
+    id: '/configuration-ia/modeles-documents',
+    path: '/configuration-ia/modeles-documents',
+    getParentRoute: () => rootRouteImport,
+  } as any)
+const ConfigurationIaParametresRoute =
+  ConfigurationIaParametresRouteImport.update({
+    id: '/configuration-ia/parametres',
+    path: '/configuration-ia/parametres',
+    getParentRoute: () => rootRouteImport,
+  } as any)
 const DemandesIndexRoute = DemandesIndexRouteImport.update({
   id: '/demandes/',
   path: '/demandes/',
@@ -141,12 +180,18 @@ const RhCollaborateursIdRoute = RhCollaborateursIdRouteImport.update({
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/connexion': typeof ConnexionRoute
   '/documents': typeof DocumentsRoute
   '/onboarding': typeof OnboardingRoute
   '/administration/parametres': typeof AdministrationParametresRoute
   '/administration/utilisateurs': typeof AdministrationUtilisateursRoute
   '/assistants/employe': typeof AssistantsEmployeRoute
   '/assistants/service-ecole': typeof AssistantsServiceEcoleRoute
+  '/configuration-ia/agents': typeof ConfigurationIaAgentsRoute
+  '/configuration-ia/base-connaissances': typeof ConfigurationIaBaseConnaissancesRoute
+  '/configuration-ia/faq': typeof ConfigurationIaFaqRoute
+  '/configuration-ia/modeles-documents': typeof ConfigurationIaModelesDocumentsRoute
+  '/configuration-ia/parametres': typeof ConfigurationIaParametresRoute
   '/demandes/conversations': typeof DemandesConversationsRoute
   '/demandes/emails': typeof DemandesEmailsRoute
   '/demandes/reclamations': typeof DemandesReclamationsRoute
@@ -164,12 +209,18 @@ export interface FileRoutesByFullPath {
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/connexion': typeof ConnexionRoute
   '/documents': typeof DocumentsRoute
   '/onboarding': typeof OnboardingRoute
   '/administration/parametres': typeof AdministrationParametresRoute
   '/administration/utilisateurs': typeof AdministrationUtilisateursRoute
   '/assistants/employe': typeof AssistantsEmployeRoute
   '/assistants/service-ecole': typeof AssistantsServiceEcoleRoute
+  '/configuration-ia/agents': typeof ConfigurationIaAgentsRoute
+  '/configuration-ia/base-connaissances': typeof ConfigurationIaBaseConnaissancesRoute
+  '/configuration-ia/faq': typeof ConfigurationIaFaqRoute
+  '/configuration-ia/modeles-documents': typeof ConfigurationIaModelesDocumentsRoute
+  '/configuration-ia/parametres': typeof ConfigurationIaParametresRoute
   '/demandes/conversations': typeof DemandesConversationsRoute
   '/demandes/emails': typeof DemandesEmailsRoute
   '/demandes/reclamations': typeof DemandesReclamationsRoute
@@ -188,12 +239,18 @@ export interface FileRoutesByTo {
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/connexion': typeof ConnexionRoute
   '/documents': typeof DocumentsRoute
   '/onboarding': typeof OnboardingRoute
   '/administration/parametres': typeof AdministrationParametresRoute
   '/administration/utilisateurs': typeof AdministrationUtilisateursRoute
   '/assistants/employe': typeof AssistantsEmployeRoute
   '/assistants/service-ecole': typeof AssistantsServiceEcoleRoute
+  '/configuration-ia/agents': typeof ConfigurationIaAgentsRoute
+  '/configuration-ia/base-connaissances': typeof ConfigurationIaBaseConnaissancesRoute
+  '/configuration-ia/faq': typeof ConfigurationIaFaqRoute
+  '/configuration-ia/modeles-documents': typeof ConfigurationIaModelesDocumentsRoute
+  '/configuration-ia/parametres': typeof ConfigurationIaParametresRoute
   '/demandes/conversations': typeof DemandesConversationsRoute
   '/demandes/emails': typeof DemandesEmailsRoute
   '/demandes/reclamations': typeof DemandesReclamationsRoute
@@ -213,12 +270,18 @@ export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
     | '/'
+    | '/connexion'
     | '/documents'
     | '/onboarding'
     | '/administration/parametres'
     | '/administration/utilisateurs'
     | '/assistants/employe'
     | '/assistants/service-ecole'
+    | '/configuration-ia/agents'
+    | '/configuration-ia/base-connaissances'
+    | '/configuration-ia/faq'
+    | '/configuration-ia/modeles-documents'
+    | '/configuration-ia/parametres'
     | '/demandes/conversations'
     | '/demandes/emails'
     | '/demandes/reclamations'
@@ -236,12 +299,18 @@ export interface FileRouteTypes {
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
+    | '/connexion'
     | '/documents'
     | '/onboarding'
     | '/administration/parametres'
     | '/administration/utilisateurs'
     | '/assistants/employe'
     | '/assistants/service-ecole'
+    | '/configuration-ia/agents'
+    | '/configuration-ia/base-connaissances'
+    | '/configuration-ia/faq'
+    | '/configuration-ia/modeles-documents'
+    | '/configuration-ia/parametres'
     | '/demandes/conversations'
     | '/demandes/emails'
     | '/demandes/reclamations'
@@ -259,12 +328,18 @@ export interface FileRouteTypes {
   id:
     | '__root__'
     | '/'
+    | '/connexion'
     | '/documents'
     | '/onboarding'
     | '/administration/parametres'
     | '/administration/utilisateurs'
     | '/assistants/employe'
     | '/assistants/service-ecole'
+    | '/configuration-ia/agents'
+    | '/configuration-ia/base-connaissances'
+    | '/configuration-ia/faq'
+    | '/configuration-ia/modeles-documents'
+    | '/configuration-ia/parametres'
     | '/demandes/conversations'
     | '/demandes/emails'
     | '/demandes/reclamations'
@@ -283,12 +358,18 @@ export interface FileRouteTypes {
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  ConnexionRoute: typeof ConnexionRoute
   DocumentsRoute: typeof DocumentsRoute
   OnboardingRoute: typeof OnboardingRoute
   AdministrationParametresRoute: typeof AdministrationParametresRoute
   AdministrationUtilisateursRoute: typeof AdministrationUtilisateursRoute
   AssistantsEmployeRoute: typeof AssistantsEmployeRoute
   AssistantsServiceEcoleRoute: typeof AssistantsServiceEcoleRoute
+  ConfigurationIaAgentsRoute: typeof ConfigurationIaAgentsRoute
+  ConfigurationIaBaseConnaissancesRoute: typeof ConfigurationIaBaseConnaissancesRoute
+  ConfigurationIaFaqRoute: typeof ConfigurationIaFaqRoute
+  ConfigurationIaModelesDocumentsRoute: typeof ConfigurationIaModelesDocumentsRoute
+  ConfigurationIaParametresRoute: typeof ConfigurationIaParametresRoute
   DemandesConversationsRoute: typeof DemandesConversationsRoute
   DemandesEmailsRoute: typeof DemandesEmailsRoute
   DemandesReclamationsRoute: typeof DemandesReclamationsRoute
@@ -312,6 +393,13 @@ declare module '@tanstack/react-router' {
       path: '/'
       fullPath: '/'
       preLoaderRoute: typeof IndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/connexion': {
+      id: '/connexion'
+      path: '/connexion'
+      fullPath: '/connexion'
+      preLoaderRoute: typeof ConnexionRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/documents': {
@@ -354,6 +442,41 @@ declare module '@tanstack/react-router' {
       path: '/assistants/service-ecole'
       fullPath: '/assistants/service-ecole'
       preLoaderRoute: typeof AssistantsServiceEcoleRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/configuration-ia/agents': {
+      id: '/configuration-ia/agents'
+      path: '/configuration-ia/agents'
+      fullPath: '/configuration-ia/agents'
+      preLoaderRoute: typeof ConfigurationIaAgentsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/configuration-ia/base-connaissances': {
+      id: '/configuration-ia/base-connaissances'
+      path: '/configuration-ia/base-connaissances'
+      fullPath: '/configuration-ia/base-connaissances'
+      preLoaderRoute: typeof ConfigurationIaBaseConnaissancesRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/configuration-ia/faq': {
+      id: '/configuration-ia/faq'
+      path: '/configuration-ia/faq'
+      fullPath: '/configuration-ia/faq'
+      preLoaderRoute: typeof ConfigurationIaFaqRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/configuration-ia/modeles-documents': {
+      id: '/configuration-ia/modeles-documents'
+      path: '/configuration-ia/modeles-documents'
+      fullPath: '/configuration-ia/modeles-documents'
+      preLoaderRoute: typeof ConfigurationIaModelesDocumentsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/configuration-ia/parametres': {
+      id: '/configuration-ia/parametres'
+      path: '/configuration-ia/parametres'
+      fullPath: '/configuration-ia/parametres'
+      preLoaderRoute: typeof ConfigurationIaParametresRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/demandes/': {
@@ -459,12 +582,18 @@ declare module '@tanstack/react-router' {
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  ConnexionRoute: ConnexionRoute,
   DocumentsRoute: DocumentsRoute,
   OnboardingRoute: OnboardingRoute,
   AdministrationParametresRoute: AdministrationParametresRoute,
   AdministrationUtilisateursRoute: AdministrationUtilisateursRoute,
   AssistantsEmployeRoute: AssistantsEmployeRoute,
   AssistantsServiceEcoleRoute: AssistantsServiceEcoleRoute,
+  ConfigurationIaAgentsRoute: ConfigurationIaAgentsRoute,
+  ConfigurationIaBaseConnaissancesRoute: ConfigurationIaBaseConnaissancesRoute,
+  ConfigurationIaFaqRoute: ConfigurationIaFaqRoute,
+  ConfigurationIaModelesDocumentsRoute: ConfigurationIaModelesDocumentsRoute,
+  ConfigurationIaParametresRoute: ConfigurationIaParametresRoute,
   DemandesConversationsRoute: DemandesConversationsRoute,
   DemandesEmailsRoute: DemandesEmailsRoute,
   DemandesReclamationsRoute: DemandesReclamationsRoute,
