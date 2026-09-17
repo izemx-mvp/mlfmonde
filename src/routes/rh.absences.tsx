@@ -283,10 +283,10 @@ function DialogueCreation({
 
   const soumettre = () => {
     const e: Record<string, string> = {};
-    if (!collaborateurId) e.collaborateurId = "Sélectionnez un collaborateur.";
-    if (!debut) e.debut = "Date de début obligatoire.";
-    if (!fin || fin < debut) e.fin = "La date de fin doit suivre la date de début.";
-    if (!motif.trim()) e.motif = "Le motif est obligatoire.";
+    if (!collaborateurId)  = "Sélectionnez un collaborateur.";
+    if (!debut)  = "Date de début obligatoire.";
+    if (!fin || fin < debut)  = "La date de fin doit suivre la date de début.";
+    if (!motif.trim())  = "Le motif est obligatoire.";
     setErreurs(e);
     if (Object.keys(e).length > 0) {
       toast.error("Formulaire incomplet", { description: "Merci de corriger les champs signalés." });
@@ -326,7 +326,7 @@ function DialogueCreation({
                 ))}
               </SelectContent>
             </Select>
-            {erreurs.collaborateurId && <p className="text-xs text-brick">{erreurs.collaborateurId}</p>}
+            {erreurs["collaborateurId"] && <p className="text-xs text-brick">{erreurs["collaborateurId"]}</p>}
           </div>
           <div className="space-y-1.5">
             <Label className="text-xs font-semibold text-muted-foreground uppercase">Type *</Label>
@@ -342,17 +342,17 @@ function DialogueCreation({
           <div className="space-y-1.5">
             <Label className="text-xs font-semibold text-muted-foreground uppercase">Date de début *</Label>
             <Input type="date" value={debut} onChange={(e) => setDebut(e.target.value)} />
-            {erreurs.debut && <p className="text-xs text-brick">{erreurs.debut}</p>}
+            {erreurs["debut"] && <p className="text-xs text-brick">{erreurs["debut"]}</p>}
           </div>
           <div className="space-y-1.5">
             <Label className="text-xs font-semibold text-muted-foreground uppercase">Date de fin *</Label>
             <Input type="date" value={fin} onChange={(e) => setFin(e.target.value)} />
-            {erreurs.fin && <p className="text-xs text-brick">{erreurs.fin}</p>}
+            {erreurs["fin"] && <p className="text-xs text-brick">{erreurs["fin"]}</p>}
           </div>
           <div className="space-y-1.5 sm:col-span-2">
             <Label className="text-xs font-semibold text-muted-foreground uppercase">Motif *</Label>
             <Textarea value={motif} onChange={(e) => setMotif(e.target.value)} placeholder="Précisez le motif de la demande" />
-            {erreurs.motif && <p className="text-xs text-brick">{erreurs.motif}</p>}
+            {erreurs["motif"] && <p className="text-xs text-brick">{erreurs["motif"]}</p>}
           </div>
         </div>
         <DialogFooter>

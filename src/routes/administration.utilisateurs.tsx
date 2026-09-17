@@ -88,9 +88,9 @@ function PageUtilisateurs() {
   const enregistrer = () => {
     if (!formulaire) return;
     const e: Record<string, string> = {};
-    if (!formulaire.nom.trim()) e.nom = "Le nom est obligatoire.";
-    if (!/^[^@\s]+@[^@\s]+\.[a-z]{2,}$/i.test(formulaire.email)) e.email = "Adresse email invalide.";
-    if (!formulaire.service.trim()) e.service = "Le service est obligatoire.";
+    if (!formulaire.nom.trim())  = "Le nom est obligatoire.";
+    if (!/^[^@\s]+@[^@\s]+\.[a-z]{2,}$/i.test(formulaire.email))  = "Adresse email invalide.";
+    if (!formulaire.service.trim())  = "Le service est obligatoire.";
     setErreurs(e);
     if (Object.keys(e).length > 0) return;
 
@@ -186,10 +186,10 @@ function PageUtilisateurs() {
           </DialogHeader>
           {formulaire && (
             <div className="grid gap-3 sm:grid-cols-2">
-              <Champ libelle="Nom complet *" erreur={erreurs.nom}>
+              <Champ libelle="Nom complet *" erreur={erreurs["nom"]}>
                 <Input value={formulaire.nom} onChange={(e) => setFormulaire({ ...formulaire, nom: e.target.value })} />
               </Champ>
-              <Champ libelle="Email professionnel *" erreur={erreurs.email}>
+              <Champ libelle="Email professionnel *" erreur={erreurs["email"]}>
                 <Input value={formulaire.email} onChange={(e) => setFormulaire({ ...formulaire, email: e.target.value })} placeholder="prenom.nom@lfilm.org" />
               </Champ>
               <Champ libelle="Rôle *">
@@ -200,7 +200,7 @@ function PageUtilisateurs() {
                   </SelectContent>
                 </Select>
               </Champ>
-              <Champ libelle="Service *" erreur={erreurs.service}>
+              <Champ libelle="Service *" erreur={erreurs["service"]}>
                 <Input value={formulaire.service} onChange={(e) => setFormulaire({ ...formulaire, service: e.target.value })} />
               </Champ>
               <Champ libelle="Statut">
@@ -249,7 +249,7 @@ function PageUtilisateurs() {
   );
 }
 
-function Champ({ libelle, erreur, children }: { libelle: string; erreur?: string; children: React.ReactNode }) {
+function Champ({ libelle, erreur, children }: { libelle: string; erreur?: string | undefined; children: React.ReactNode }) {
   return (
     <div className="space-y-1.5">
       <Label className="text-xs font-semibold text-muted-foreground uppercase">{libelle}</Label>

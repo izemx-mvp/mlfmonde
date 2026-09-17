@@ -55,12 +55,12 @@ function PageEvenements() {
     .slice(0, 4);
 
   const colonnes: Column<EvenementRH>[] = [
-    { key: "intitule", header: "Événement", sortValue: (e) => e.intitule, render: (e) => <span className="font-medium">{e.intitule}</span> },
+    { key: "intitule", header: "Événement", sortValue: (e) => , render: (e) => <span className="font-medium">{}</span> },
     {
       key: "collaborateur",
       header: "Collaborateur",
-      sortValue: (e) => nomComplet(e.collaborateurId),
-      render: (e) => <AvatarPersonne nom={nomComplet(e.collaborateurId)} sousTitre={getCollaborateur(e.collaborateurId)?.service} taille="sm" />,
+      sortValue: (e) => nomComplet(),
+      render: (e) => <AvatarPersonne nom={nomComplet()} sousTitre={getCollaborateur()?.service} taille="sm" />,
     },
     { key: "type", header: "Type", sortValue: (e) => e.type, render: (e) => e.type },
     { key: "date", header: "Date", sortValue: (e) => e.date, render: (e) => formatDate(e.date) },
@@ -78,7 +78,7 @@ function PageEvenements() {
               variant="outline"
               onClick={() => {
                 majEvenement(e.id, { statut: "Terminé" });
-                toast.success("Événement clôturé", { description: `${e.intitule} — ${nomComplet(e.collaborateurId)}.` });
+                toast.success("Événement clôturé", { description: `${} — ${nomComplet()}.` });
               }}
             >
               <Check className="size-4" />
@@ -123,10 +123,10 @@ function PageEvenements() {
               <AlertTriangle className="mt-0.5 size-4 shrink-0 text-orange" />
               <div>
                 <p className="text-sm font-medium text-foreground">
-                  {e.type} dans {jours} jour{jours > 1 ? "s" : ""} — {nomComplet(e.collaborateurId)}
+                  {e.type} dans {jours} jour{jours > 1 ? "s" : ""} — {nomComplet()}
                 </p>
                 <p className="text-xs text-muted-foreground">
-                  {e.intitule} · prévu le {formatDate(e.date)} · responsable {e.responsable}
+                  {} · prévu le {formatDate(e.date)} · responsable {e.responsable}
                 </p>
               </div>
             </div>
@@ -145,7 +145,7 @@ function PageEvenements() {
             columns={colonnes}
             rowKey={(e) => e.id}
             placeholderRecherche="Événement, collaborateur, responsable…"
-            recherche={(e, t) => `${e.intitule} ${e.type} ${nomComplet(e.collaborateurId)} ${e.responsable}`.toLowerCase().includes(t)}
+            recherche={(e, t) => `${} ${e.type} ${nomComplet()} ${e.responsable}`.toLowerCase().includes(t)}
             filtres={
               <>
                 <FiltreSelect valeur={type} onChange={setType} options={TYPES} libelle="Type" largeur="w-60" />
@@ -159,7 +159,7 @@ function PageEvenements() {
             evenements={evenements.map((e) => ({
               id: e.id,
               date: e.date,
-              libelle: `${e.type} — ${nomComplet(e.collaborateurId)}`,
+              libelle: `${e.type} — ${nomComplet()}`,
               ton: (e.type === "Visite médicale" ? "brick" : e.type === "Formation" ? "leaf" : "petrol") as "brick" | "leaf" | "petrol",
             }))}
             onSelectionner={(ev) => toast.info("Événement", { description: ev.libelle })}
@@ -174,7 +174,7 @@ function PageEvenements() {
             onClose={() => setCreation(false)}
             onCreer={(e) => {
               ajouterEvenement(e);
-              toast.success("Événement planifié", { description: `${e.intitule} — ${formatDate(e.date)}.` });
+              toast.success("Événement planifié", { description: `${} — ${formatDate(e.date)}.` });
             }}
           />
         </DialogContent>
@@ -209,7 +209,7 @@ function FormulaireEvenement({
         <div className="space-y-1.5 sm:col-span-2">
           <Label className="text-xs font-semibold text-muted-foreground uppercase">Intitulé *</Label>
           <Input value={intitule} onChange={(e) => setIntitule(e.target.value)} placeholder="Visite médicale annuelle" />
-          {erreurs.intitule && <p className="text-xs text-brick">{erreurs.intitule}</p>}
+          {erreurs["intitule"] && <p className="text-xs text-brick">{erreurs["intitule"]}</p>}
         </div>
         <div className="space-y-1.5">
           <Label className="text-xs font-semibold text-muted-foreground uppercase">Collaborateur *</Label>
@@ -221,7 +221,7 @@ function FormulaireEvenement({
               ))}
             </SelectContent>
           </Select>
-          {erreurs.collaborateurId && <p className="text-xs text-brick">{erreurs.collaborateurId}</p>}
+          {erreurs["collaborateurId"] && <p className="text-xs text-brick">{erreurs["collaborateurId"]}</p>}
         </div>
         <div className="space-y-1.5">
           <Label className="text-xs font-semibold text-muted-foreground uppercase">Type *</Label>
@@ -248,8 +248,8 @@ function FormulaireEvenement({
         <Button
           onClick={() => {
             const err: Record<string, string> = {};
-            if (!intitule.trim()) err.intitule = "L'intitulé est obligatoire.";
-            if (!collaborateurId) err.collaborateurId = "Sélectionnez un collaborateur.";
+            if (!intitule.trim())  = "L'intitulé est obligatoire.";
+            if (!collaborateurId)  = "Sélectionnez un collaborateur.";
             setErreurs(err);
             if (Object.keys(err).length > 0) {
               toast.error("Formulaire incomplet", { description: "Merci de corriger les champs signalés." });
