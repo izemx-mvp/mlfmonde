@@ -12,6 +12,8 @@ import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as DocumentsRouteImport } from './routes/documents'
 import { Route as OnboardingRouteImport } from './routes/onboarding'
+import { Route as AdministrationParametresRouteImport } from './routes/administration.parametres'
+import { Route as AdministrationUtilisateursRouteImport } from './routes/administration.utilisateurs'
 import { Route as AssistantsEmployeRouteImport } from './routes/assistants.employe'
 import { Route as AssistantsServiceEcoleRouteImport } from './routes/assistants.service-ecole'
 import { Route as DemandesIndexRouteImport } from './routes/demandes.index'
@@ -44,6 +46,18 @@ const OnboardingRoute = OnboardingRouteImport.update({
   path: '/onboarding',
   getParentRoute: () => rootRouteImport,
 } as any)
+const AdministrationParametresRoute =
+  AdministrationParametresRouteImport.update({
+    id: '/administration/parametres',
+    path: '/administration/parametres',
+    getParentRoute: () => rootRouteImport,
+  } as any)
+const AdministrationUtilisateursRoute =
+  AdministrationUtilisateursRouteImport.update({
+    id: '/administration/utilisateurs',
+    path: '/administration/utilisateurs',
+    getParentRoute: () => rootRouteImport,
+  } as any)
 const AssistantsEmployeRoute = AssistantsEmployeRouteImport.update({
   id: '/assistants/employe',
   path: '/assistants/employe',
@@ -129,6 +143,8 @@ export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/documents': typeof DocumentsRoute
   '/onboarding': typeof OnboardingRoute
+  '/administration/parametres': typeof AdministrationParametresRoute
+  '/administration/utilisateurs': typeof AdministrationUtilisateursRoute
   '/assistants/employe': typeof AssistantsEmployeRoute
   '/assistants/service-ecole': typeof AssistantsServiceEcoleRoute
   '/demandes/conversations': typeof DemandesConversationsRoute
@@ -150,6 +166,8 @@ export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/documents': typeof DocumentsRoute
   '/onboarding': typeof OnboardingRoute
+  '/administration/parametres': typeof AdministrationParametresRoute
+  '/administration/utilisateurs': typeof AdministrationUtilisateursRoute
   '/assistants/employe': typeof AssistantsEmployeRoute
   '/assistants/service-ecole': typeof AssistantsServiceEcoleRoute
   '/demandes/conversations': typeof DemandesConversationsRoute
@@ -172,6 +190,8 @@ export interface FileRoutesById {
   '/': typeof IndexRoute
   '/documents': typeof DocumentsRoute
   '/onboarding': typeof OnboardingRoute
+  '/administration/parametres': typeof AdministrationParametresRoute
+  '/administration/utilisateurs': typeof AdministrationUtilisateursRoute
   '/assistants/employe': typeof AssistantsEmployeRoute
   '/assistants/service-ecole': typeof AssistantsServiceEcoleRoute
   '/demandes/conversations': typeof DemandesConversationsRoute
@@ -195,6 +215,8 @@ export interface FileRouteTypes {
     | '/'
     | '/documents'
     | '/onboarding'
+    | '/administration/parametres'
+    | '/administration/utilisateurs'
     | '/assistants/employe'
     | '/assistants/service-ecole'
     | '/demandes/conversations'
@@ -216,6 +238,8 @@ export interface FileRouteTypes {
     | '/'
     | '/documents'
     | '/onboarding'
+    | '/administration/parametres'
+    | '/administration/utilisateurs'
     | '/assistants/employe'
     | '/assistants/service-ecole'
     | '/demandes/conversations'
@@ -237,6 +261,8 @@ export interface FileRouteTypes {
     | '/'
     | '/documents'
     | '/onboarding'
+    | '/administration/parametres'
+    | '/administration/utilisateurs'
     | '/assistants/employe'
     | '/assistants/service-ecole'
     | '/demandes/conversations'
@@ -259,6 +285,8 @@ export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   DocumentsRoute: typeof DocumentsRoute
   OnboardingRoute: typeof OnboardingRoute
+  AdministrationParametresRoute: typeof AdministrationParametresRoute
+  AdministrationUtilisateursRoute: typeof AdministrationUtilisateursRoute
   AssistantsEmployeRoute: typeof AssistantsEmployeRoute
   AssistantsServiceEcoleRoute: typeof AssistantsServiceEcoleRoute
   DemandesConversationsRoute: typeof DemandesConversationsRoute
@@ -298,6 +326,20 @@ declare module '@tanstack/react-router' {
       path: '/onboarding'
       fullPath: '/onboarding'
       preLoaderRoute: typeof OnboardingRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/administration/parametres': {
+      id: '/administration/parametres'
+      path: '/administration/parametres'
+      fullPath: '/administration/parametres'
+      preLoaderRoute: typeof AdministrationParametresRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/administration/utilisateurs': {
+      id: '/administration/utilisateurs'
+      path: '/administration/utilisateurs'
+      fullPath: '/administration/utilisateurs'
+      preLoaderRoute: typeof AdministrationUtilisateursRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/assistants/employe': {
@@ -419,6 +461,8 @@ const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   DocumentsRoute: DocumentsRoute,
   OnboardingRoute: OnboardingRoute,
+  AdministrationParametresRoute: AdministrationParametresRoute,
+  AdministrationUtilisateursRoute: AdministrationUtilisateursRoute,
   AssistantsEmployeRoute: AssistantsEmployeRoute,
   AssistantsServiceEcoleRoute: AssistantsServiceEcoleRoute,
   DemandesConversationsRoute: DemandesConversationsRoute,
