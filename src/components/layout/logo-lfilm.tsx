@@ -1,29 +1,22 @@
 import { cn } from "@/lib/utils";
+import logoLfilm from "@/assets/lfilm-logo.png.asset.json";
 
 export function LogoLfilm({ compact = false, sombre = true }: { compact?: boolean; sombre?: boolean }) {
   return (
-    <div className="flex items-center gap-3">
-      <div className="grid size-9 shrink-0 grid-cols-3 gap-[2px] rounded-md bg-background/10 p-[3px]">
-        <span className="rounded-[2px] bg-navy" />
-        <span className="rounded-[2px] bg-brick" />
-        <span className="rounded-[2px] bg-orange" />
-        <span className="rounded-[2px] bg-gold" />
-        <span className="rounded-[2px] bg-leaf" />
-        <span className="rounded-[2px] bg-sky" />
-        <span className="rounded-[2px] bg-petrol" />
-        <span className="rounded-[2px] bg-gold" />
-        <span className="rounded-[2px] bg-brick" />
+    <div className={cn("flex min-w-0 items-center", compact ? "justify-center" : "w-full")}>
+      <div
+        className={cn(
+          "flex shrink-0 items-center justify-center overflow-hidden rounded-md border bg-background",
+          compact ? "size-11 p-1.5" : "h-14 w-full max-w-[210px] px-2 py-1.5",
+          sombre ? "border-sidebar-border" : "border-border",
+        )}
+      >
+        <img
+          src={logoLfilm.url}
+          alt="Lycée Français International Louis-Massignon"
+          className="block h-full w-full object-contain"
+        />
       </div>
-      {!compact && (
-        <div className="min-w-0 leading-tight">
-          <p className={cn("font-display text-sm font-bold tracking-tight", sombre ? "text-sidebar-accent-foreground" : "text-navy")}>
-            LFILM Smart School
-          </p>
-          <p className={cn("truncate text-[11px]", sombre ? "text-sidebar-foreground/70" : "text-muted-foreground")}>
-            Louis-Massignon · Bouskoura
-          </p>
-        </div>
-      )}
     </div>
   );
 }

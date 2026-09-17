@@ -4,7 +4,10 @@ import {
   Brain,
   Building2,
   CalendarClock,
+  CircleHelp,
   ClipboardList,
+  Database,
+  FileCog,
   FileText,
   Gauge,
   GraduationCap,
@@ -16,6 +19,7 @@ import {
   ScanSearch,
   Settings,
   ShieldCheck,
+  SlidersHorizontal,
   Users,
   UserSearch,
   type LucideIcon,
@@ -86,7 +90,6 @@ export const GROUPES_NAV: GroupeNav[] = [
       { libelle: "Toutes les demandes", href: "/demandes", icone: Inbox },
       { libelle: "Réclamations", href: "/demandes/reclamations", icone: ClipboardList },
       { libelle: "Emails entrants", href: "/demandes/emails", icone: Mail },
-      { libelle: "Conversations", href: "/demandes/conversations", icone: MessageSquare },
     ],
   },
   {
@@ -95,6 +98,17 @@ export const GROUPES_NAV: GroupeNav[] = [
     liens: [
       { libelle: "Utilisateurs", href: "/administration/utilisateurs", icone: Users },
       { libelle: "Paramètres", href: "/administration/parametres", icone: Settings },
+    ],
+  },
+  {
+    titre: "CONFIGURATION IA",
+    icone: Brain,
+    liens: [
+      { libelle: "Agents IA", href: "/configuration-ia/agents", icone: Bot },
+      { libelle: "Base de connaissances", href: "/configuration-ia/base-connaissances", icone: Database },
+      { libelle: "Modèles de documents", href: "/configuration-ia/modeles-documents", icone: FileCog },
+      { libelle: "FAQ", href: "/configuration-ia/faq", icone: CircleHelp },
+      { libelle: "Paramètres", href: "/configuration-ia/parametres", icone: SlidersHorizontal },
     ],
   },
 ];
