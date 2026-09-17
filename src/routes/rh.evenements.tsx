@@ -59,8 +59,8 @@ function PageEvenements() {
     {
       key: "collaborateur",
       header: "Collaborateur",
-      sortValue: (e) => nomComplet(),
-      render: (e) => <AvatarPersonne nom={nomComplet()} sousTitre={getCollaborateur()?.service} taille="sm" />,
+      sortValue: (e) => nomComplet(e.collaborateurId),
+      render: (e) => <AvatarPersonne nom={nomComplet(e.collaborateurId)} sousTitre={getCollaborateur(e.collaborateurId)?.service} taille="sm" />,
     },
     { key: "type", header: "Type", sortValue: (e) => e.type, render: (e) => e.type },
     { key: "date", header: "Date", sortValue: (e) => e.date, render: (e) => formatDate(e.date) },
@@ -123,7 +123,7 @@ function PageEvenements() {
               <AlertTriangle className="mt-0.5 size-4 shrink-0 text-orange" />
               <div>
                 <p className="text-sm font-medium text-foreground">
-                  {e.type} dans {jours} jour{jours > 1 ? "s" : ""} — {nomComplet()}
+                  {e.type} dans {jours} jour{jours > 1 ? "s" : ""} — {nomComplet(e.collaborateurId)}
                 </p>
                 <p className="text-xs text-muted-foreground">
                   {} · prévu le {formatDate(e.date)} · responsable {e.responsable}
@@ -159,7 +159,7 @@ function PageEvenements() {
             evenements={evenements.map((e) => ({
               id: e.id,
               date: e.date,
-              libelle: `${e.type} — ${nomComplet()}`,
+              libelle: `${e.type} — ${nomComplet(e.collaborateurId)}`,
               ton: (e.type === "Visite médicale" ? "brick" : e.type === "Formation" ? "leaf" : "petrol") as "brick" | "leaf" | "petrol",
             }))}
             onSelectionner={(ev) => toast.info("Événement", { description: ev.libelle })}
