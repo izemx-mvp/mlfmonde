@@ -23,9 +23,8 @@ export const Route = createFileRoute("/connexion")({
 
 function PageConnexion() {
   const router = useRouter();
-  const connecter = useServerFn(connecterLFILM);
-  const [email, setEmail] = useState("mlfmonde@izemxlab.com");
-  const [password, setPassword] = useState("mlfmonde2026@");
+  const [email, setEmail] = useState(IDENTIFIANTS_LFILM.email);
+  const [password, setPassword] = useState(IDENTIFIANTS_LFILM.password);
   const [erreur, setErreur] = useState("");
   const [chargement, setChargement] = useState(false);
   const [pret, setPret] = useState(false);
@@ -39,14 +38,12 @@ function PageConnexion() {
     setChargement(true);
 
     try {
-      const resultat = await connecter({ data: { email, password } });
-      if (!resultat.ok) {
+      if (!verifierIdentifiants(email, password)) {
         setErreur("Email ou mot de passe incorrect.");
         return;
       }
+      ouvrirSession();
       await router.navigate({ to: "/" });
-    } catch {
-      setErreur("Connexion indisponible pour le moment.");
     } finally {
       setChargement(false);
     }
