@@ -3,7 +3,6 @@ import {
   Outlet,
   Link,
   createRootRouteWithContext,
-  redirect,
   useRouter,
   useRouterState,
   HeadContent,
@@ -17,7 +16,7 @@ import { AppShell } from "@/components/layout/app-shell";
 import { AppStoreProvider } from "@/store/app-store";
 import { Toaster } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
-import { verifierSessionLFILM } from "@/lib/auth.functions";
+import { sessionOuverte } from "@/lib/session-locale";
 
 function NotFoundComponent() {
   return (
