@@ -10,33 +10,53 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as RhCommandCenterRouteImport } from './routes/rh.command-center'
+import { Route as RhCollaborateursIndexRouteImport } from './routes/rh.collaborateurs.index'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const RhCommandCenterRoute = RhCommandCenterRouteImport.update({
+  id: '/rh/command-center',
+  path: '/rh/command-center',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const RhCollaborateursIndexRoute = RhCollaborateursIndexRouteImport.update({
+  id: '/rh/collaborateurs/',
+  path: '/rh/collaborateurs/',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/rh/command-center': typeof RhCommandCenterRoute
+  '/rh/collaborateurs/': typeof RhCollaborateursIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/rh/command-center': typeof RhCommandCenterRoute
+  '/rh/collaborateurs': typeof RhCollaborateursIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/rh/command-center': typeof RhCommandCenterRoute
+  '/rh/collaborateurs/': typeof RhCollaborateursIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/'
+  fullPaths: '/' | '/rh/command-center' | '/rh/collaborateurs/'
   fileRoutesByTo: FileRoutesByTo
-  to: '/'
-  id: '__root__' | '/'
+  to: '/' | '/rh/command-center' | '/rh/collaborateurs'
+  id: '__root__' | '/' | '/rh/command-center' | '/rh/collaborateurs/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  RhCommandCenterRoute: typeof RhCommandCenterRoute
+  RhCollaborateursIndexRoute: typeof RhCollaborateursIndexRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -48,11 +68,27 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/rh/command-center': {
+      id: '/rh/command-center'
+      path: '/rh/command-center'
+      fullPath: '/rh/command-center'
+      preLoaderRoute: typeof RhCommandCenterRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/rh/collaborateurs/': {
+      id: '/rh/collaborateurs/'
+      path: '/rh/collaborateurs'
+      fullPath: '/rh/collaborateurs/'
+      preLoaderRoute: typeof RhCollaborateursIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  RhCommandCenterRoute: RhCommandCenterRoute,
+  RhCollaborateursIndexRoute: RhCollaborateursIndexRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
